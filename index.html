@@ -373,7 +373,7 @@
           <h4 id="sb-tree">Дерево рекламной кампании</h4>
           <p>Проблема: в&nbsp;карточках дерева при&nbsp;большом количестве групп и&nbsp;объявлений терялась иерархия, и&nbsp;было визуально сложно разделить информацию.</p>
           <p>До&nbsp;этого команда переработала карточки и&nbsp;улучшила восприятие, но&nbsp;при большом количестве они занимают много места и&nbsp;нет быстрой навигации.</p>
-          <p>Я&nbsp;объединила первый и&nbsp;второй варианты, оставив разделения между группами, уменьшила высоту карточки и&nbsp;добавила скроллбар для&nbsp;быстрого просмотра списка без&nbsp;изменения положения основной зоны.</p>
+          <p>Я&nbsp;объединила первый и&nbsp;второй варианты, оставив разделения между группами, уменьшила высоту карточки, а&nbsp;также добавлен скроллбар для&nbsp;быстрого просмотра списка без&nbsp;изменения положения основной зоны.</p>
         </header>
         <div class="rk-cmp" role="button" tabindex="0" data-title="Дерево рекламной кампании · V1, V2, V3" aria-label="Открыть сравнение вариантов крупно">
           <figure><figcaption>V1</figcaption><div class="rk-b"><img src="img/f/rk-v1.webp" alt="Вариант 1: дерево кампании списком" width="800" height="1201" loading="lazy"></div></figure>
@@ -758,9 +758,10 @@
   const fit = () => root.style.setProperty('--s', (stage.clientWidth / 698).toFixed(4));
   fit(); new ResizeObserver(fit).observe(stage);
   // скроллбар
+  let barOn = false;
   (function bars() {
     const vh = view.clientHeight, ch = list.scrollHeight, track = vh - 8;
-    if (ch > vh + 2) { const th = 56; bar.style.height = th + 'px'; bar.style.transform = `translateY(${(track - th) * view.scrollTop / (ch - vh)}px)`; bar.classList.add('show'); }
+    if (barOn && ch > vh + 2) { const th = 56; bar.style.height = th + 'px'; bar.style.transform = `translateY(${(track - th) * view.scrollTop / (ch - vh)}px)`; bar.classList.add('show'); }
     else bar.classList.remove('show');
     requestAnimationFrame(bars);
   })();
@@ -808,7 +809,9 @@
       // 4. скролл со скроллбаром
       await moveTo(250, 640, 700); await wait(200);
       const max = list.scrollHeight - view.clientHeight;
+      barOn = true; await wait(250);
       await scrollTo(max, 2600); await wait(900); await scrollTo(0, 1600);
+      await wait(400); barOn = false;
       await moveTo(760, 520, 900); await wait(1600);
       root.style.transition = 'opacity .4s'; root.style.opacity = 0; await wait(450); reset(); root.style.opacity = 1;
     }
