@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Портфолио Дарьи Шульженко: UX/UI, продуктовая и коммуникационная графика, SberAds, ОРД, Рамблер/.">
+<meta property="og:title" content="Дарья Шульженко — дизайнер">
+<meta property="og:description" content="UX/UI, продуктовая и коммуникационная графика: SberAds, ОРД, Рамблер/.">
+<meta property="og:image" content="img/me.webp">
+<link rel="icon" href="img/me.webp">
+<style>[hidden]{display:none!important}</style>
+<title>Дарья Шульженко — дизайнер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+  /* Layout: белая страница, каждый блок = место работы. Слева узкая липкая колонка (знак, компания, роль, годы),
+     справа сетка 2×N из работ на светло-серых подложках с подписью «заголовок + 1–2 строки». Одна светлая тема намеренно. */
+  :root {
+    color-scheme: light;
+    --bg: #FFFFFF;
+    --ink: #16181D;
+    --muted: #6E737D;
+    --tile: #F2F3F5;
+    --line: #E6E8EC;
+    --chip: #F2F3F5;
+    --accent: #0D8BFF;
+    --font-display: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ui: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; letter-spacing: 0.015em; word-spacing: 0.08em; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .page { max-width: 1240px; margin: 0 auto; padding-block: 56px 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  @media (min-width: 720px) { .page { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+  /* Ряд: левая колонка с подписью + правая с содержимым */
+  .row { display: grid; gap: 20px 48px; padding-block: 48px; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .row:first-child { padding-top: 0; }
+  @media (min-width: 900px) {
+    .row { grid-template-columns: 220px minmax(0, 1fr); }
+    .side { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 32px); align-self: start; }
+  }
+  .side { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; line-height: 1.45; }
+  .side .badge { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 14px; flex: none; }
+  .side b { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .side .m { color: var(--muted); }
+  .side .when { margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .side .note { margin-top: 10px; color: var(--muted); font-size: 13px; }
+  @media (max-width: 899px) { .side .badge { width: 36px; height: 36px; margin-bottom: 10px; } }
+
+  .b-sber { background: var(--tile); }
+  .b-rambler { background: #315EFB; color: #fff; font: 700 22px/1 var(--font-display); }
+  .b-hse { background: var(--tile); font: 600 11px/1 var(--font-display); letter-spacing: 0.02em; }
+
+  /* Интро */
+  .intro { display: flex; flex-direction: column; gap: 22px; max-width: 46em; }
+  .intro p { margin: 0; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; font-weight: 400; letter-spacing: 0.012em; word-spacing: 0.08em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .chips li { padding: 5px 12px; border-radius: 100px; background: var(--chip); font-size: 14px; color: var(--ink); }
+  .loc { font-size: 15px; color: var(--muted); }
+  .side .me { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin-bottom: 14px; }
+  .name-big { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+
+  /* Сетка работ */
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 16px; }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; gap: 32px; } }
+  .card { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  .card.wide { grid-column: 1 / -1; }
+  .shot { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 28px; border: 0; border-radius: 10px; background: var(--tile); cursor: zoom-in; overflow: hidden; }
+  .card.wide .shot { aspect-ratio: 2 / 1; }
+  .shot img { width: 100%; height: 100%; object-fit: contain; transition: transform .25s ease; }
+  .shot.tall { padding: 28px 28px 0; }
+  .shot.tall img { object-fit: cover; object-position: top; border-radius: 6px 6px 0 0; box-shadow: 0 1px 3px rgba(22,24,29,0.12); }
+  .shot.photo { padding: 0; }
+  .shot.photo img { object-fit: cover; }
+  .shot:hover img { transform: scale(1.015); }
+  .card figcaption { display: flex; flex-direction: column; gap: 3px; font-size: 14px; line-height: 1.5; max-width: 38em; }
+  .card figcaption b { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .card figcaption span { color: var(--muted); }
+
+  .stack { display: flex; flex-direction: column; gap: 72px; min-width: 0; }
+  .project { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .proj-head { display: flex; flex-direction: column; gap: 8px; max-width: 46em; }
+  .proj-head h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(20px, 2vw, 24px); line-height: 1.25; letter-spacing: 0; font-weight: 600; }
+  .me-link { margin-top: 4px; color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .me-link:hover { text-decoration: underline; }
+  .ext, .me-link { display: inline-flex; align-items: center; gap: 6px; }
+  .ext .arr, .me-link .arr { display: block; flex: none; }
+  .proj-div { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--line); }
+  .subproj { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; min-width: 0; }
+  .proj-head h4 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 18px; line-height: 1.3; letter-spacing: 0; }
+  .proj-head p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
+  .project .grid { gap: 28px 16px; }
+  .case-cover { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
+  .mosaic { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; aspect-ratio: 2 / 1; }
+  .mosaic .m { position: relative; display: block; overflow: hidden; border-radius: 10px; background: var(--tile); }
+  .mosaic .big { grid-row: 1 / 3; }
+  .mosaic img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+  .case-cover:hover .mosaic img { transform: scale(1.02); }
+  .mosaic .more-n { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(22,24,29,0.45); color: #fff; font: 600 clamp(20px, 2.4vw, 32px)/1 var(--font-display); }
+  .mosaic.m3 { grid-template-columns: 2fr 1fr; }
+  @media (max-width: 560px) { .mosaic.m3 { grid-template-columns: 1fr 1fr; } .mosaic.m3 .big { aspect-ratio: 4 / 3; } }
+  .mosaic.m4 { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; aspect-ratio: auto; }
+  .mosaic.m4 .m { aspect-ratio: 16 / 10; grid-row: auto; grid-column: auto; }
+  .mosaic.m4 .m:not(:first-child) { background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+  .mosaic.m4 .m:not(:first-child) img { object-fit: contain; padding: 6%; }
+  .case-link { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; }
+  .case-link img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; transition: transform .3s ease; }
+  @media (max-width: 560px) { .case-link img { aspect-ratio: 4 / 3; } }
+  .case-link:hover img { transform: scale(1.02); }
+  .case-link .ext, .case-cover[data-gallery] .ext { position: absolute; right: 12px; bottom: 12px; padding: 6px 12px; border-radius: 100px; background: rgba(255,255,255,0.92); color: var(--ink); font-size: 14px; font-weight: 600; }
+  .case-cover[data-gallery] { position: relative; }
+  .case-cover[data-gallery] .ext { z-index: 1; }
+  .case-shot { overflow: hidden; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); }
+  .case-shot img { display: block; width: 100%; height: auto; transition: transform .3s ease; }
+  .case-note { margin: -8px 0 0; color: var(--muted); font-size: 14px; }
+  @media (max-width: 560px) { .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; aspect-ratio: auto; } .mosaic .big { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; } .mosaic .m:not(.big) { aspect-ratio: 4 / 3; } }
+  .viewer .stage.gallery { place-items: start center; }
+  .gal { display: flex; flex-direction: column; gap: 32px; width: min(100%, 600px); padding-bottom: 40px; }
+  .gal figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .gal img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 8px 32px rgba(22,24,29,0.12); }
+  .gal figcaption { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  /* Опыт и образование */
+  .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .list li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .list li:first-child { border-top: 0; padding-top: 0; }
+  .list .y { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .list b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .list .o { display: block; color: var(--muted); }
+  .list p { margin: 6px 0 0; max-width: 42em; }
+  @media (max-width: 560px) { .list li { grid-template-columns: 1fr; } }
+
+  .foot { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; color: var(--muted); font-size: 14px; }
+
+  /* Просмотр */
+  .viewer { position: fixed; inset: 0; z-index: 20; display: grid; grid-template-rows: auto minmax(0, 1fr); background: var(--bg);
+    padding-block: max(12px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .viewer header { display: flex; align-items: center; gap: 16px; min-height: 48px; }
+  .viewer header b { font-family: var(--font-display); font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .viewer .close { margin-left: auto; font: 500 14px var(--font-body); color: var(--ink); background: var(--chip); border: 0; border-radius: 100px; padding: 8px 16px; cursor: pointer; }
+  .viewer .stage { min-height: 0; overflow: auto; display: grid; place-items: start center; padding-top: 8px; }
+  .viewer .stage img { max-width: min(100%, 720px); width: auto; border-radius: 6px; box-shadow: 0 8px 32px rgba(22,24,29,0.12); }
+  /* География показов — анимация */
+  .geo-stage { position: relative; aspect-ratio: 5 / 4; background: #E8EBF2; border-radius: 10px; overflow: hidden; }
+  @media (max-width: 560px) { .geo-stage { aspect-ratio: 3 / 4; } }
+  .geo { --s: .78; position: absolute; left: 50%; top: 50%; width: 644px; height: 852px; transform: translate(-50%, -50%) scale(var(--s)); background: #fff; border-radius: 8px; box-shadow: 0 4px 24px rgba(51,63,72,.08); color: #333F48; font-family: var(--font-ui); font-size: 16px; line-height: 24px; text-align: left; user-select: none; }
+  .geo * { box-sizing: border-box; }
+  .geo .g-head { position: absolute; left: 24px; top: 24px; display: flex; gap: 8px; align-items: center; font: 600 22px/28px var(--font-ui); }
+  .geo .g-sub { position: absolute; left: 24px; top: 64px; width: 596px; margin: 0; line-height: 20px; }
+  .geo .g-tabs { position: absolute; left: 24px; top: 128px; width: 596px; height: 44px; padding: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: rgba(171,176,185,.2); border-radius: 8px; }
+  .geo .g-tabs span { display: grid; place-items: center; border-radius: 6px; }
+  .geo .g-tabs .on { background: #fff; box-shadow: 0 1px 3px rgba(51,63,72,.15); }
+  .geo .g-map { position: absolute; left: 24px; top: 196px; width: 596px; height: 320px; border-radius: 8px; overflow: hidden; background: #F1EEE6; }
+  .geo .g-map > img { display: block; width: 596px; height: 320px; }
+  .geo .g-ctrl { position: absolute; right: 6px; top: 7px; }
+  .geo .g-pt { position: absolute; width: 0; height: 0; }
+  .geo .g-rad { position: absolute; left: 0; top: 0; width: calc(var(--r) * 2px); height: calc(var(--r) * 2px); margin: calc(var(--r) * -1px) 0 0 calc(var(--r) * -1px); border-radius: 50%; background: rgba(0,135,205,.15); border: 1px solid rgba(0,135,205,.25); opacity: 0; transition: opacity .3s ease, width .7s ease, height .7s ease, margin .7s ease, background .3s, border-color .3s; }
+  .geo .g-pin { position: absolute; left: -14px; top: -28px; opacity: 0; transition: opacity .2s ease; }
+  .geo .g-pin svg { display: block; }
+  .geo .g-pin .grey { position: absolute; inset: 0; opacity: 0; transition: opacity .3s; }
+  .geo .g-pt.show .g-rad { opacity: 1; }
+  .geo .g-pt.show .g-pin { opacity: 1; }
+  .geo .g-pt.off .g-rad { background: rgba(51,63,72,.11); border-color: rgba(51,63,72,.15); }
+  .geo .g-pt.off .g-pin .grey { opacity: 1; }
+  .geo .g-tip { position: absolute; left: 8px; right: 8px; bottom: 8px; height: 36px; padding: 0 12px 0 16px; display: flex; align-items: center; gap: 24px; background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(51,63,72,.2); font-size: 12px; line-height: 16px; color: #000; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s; }
+  .geo .g-tip.show { opacity: 1; transform: none; }
+  .geo .g-tip .g-del { margin-left: auto; display: block; }
+  .geo .g-sp { display: inline-flex; align-items: center; gap: 4px; color: #0087CD; white-space: nowrap; }
+  .geo .g-sp svg { display: block; transition: transform .2s; }
+  .geo .g-sp.open svg { transform: rotate(180deg); }
+  .geo .g-lbl { position: absolute; left: 24px; top: 540px; }
+  .geo .g-input { position: absolute; left: 24px; top: 572px; width: 596px; height: 44px; padding: 10px 16px; border: 1px solid #D0D4DA; border-radius: 6px; color: #ABB0B9; }
+  .geo .g-empty { position: absolute; left: 24px; top: 640px; width: 596px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: opacity .3s; }
+  .geo .g-empty b { margin-top: 8px; font: 600 20px/28px var(--font-ui); }
+  .geo .g-empty span { margin-top: 8px; color: #83868D; }
+  .geo.has .g-empty { opacity: 0; }
+  .geo .g-list { position: absolute; left: 24px; top: 640px; width: 596px; opacity: 0; transition: opacity .3s; }
+  .geo.has .g-list { opacity: 1; }
+  .geo .g-lh { height: 36px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; line-height: 16px; }
+  .geo .g-row { height: 68px; margin-top: 0; padding: 12px; display: flex; align-items: flex-start; gap: 24px; border-bottom: 1px solid #ECEEF1; opacity: 0; transform: translateY(-6px); transition: opacity .3s, transform .3s, background .3s; }
+  .geo .g-row:first-of-type { margin-top: 8px; }
+  .geo .g-row.show { opacity: 1; transform: none; }
+  .geo .g-row.act { background: #F4F7FB; }
+  .geo .g-row div { display: flex; flex-direction: column; }
+  .geo .g-row small { font-size: 12px; line-height: 16px; color: #83868D; margin-top: 4px; }
+  .geo .g-menu { position: absolute; width: 132px; padding: 6px 0; overflow: hidden; background: #fff; border-radius: 8px; box-shadow: 0 6px 24px rgba(51,63,72,.18), 0 0 0 1px rgba(51,63,72,.06); opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .2s, transform .2s; }
+  .geo .g-menu.show { opacity: 1; transform: none; }
+  .geo .g-mscroll { height: 180px; overflow: hidden; }
+  .geo .g-mbar { position: absolute; right: 4px; top: 8px; width: 4px; height: 44px; border-radius: 2px; background: #D0D4DA; transform: translateY(36px); }
+  .geo .g-menu span { display: flex; justify-content: space-between; align-items: center; height: 36px; padding: 0 14px; }
+  .geo .g-menu .cur { color: #0087CD; }
+  .geo .g-menu .hov { background: #F2F4F7; }
+  .geo .g-cur { position: absolute; left: 0; top: 0; z-index: 5; transform: translate(560px, 700px); transition: transform .9s cubic-bezier(.45,.05,.25,1); pointer-events: none; }
+  .geo .g-cur > * { position: absolute; display: block; max-width: none; transition: transform .12s, opacity .12s; }
+  .geo .g-cur .c-arrow { left: -2px; top: -2px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+  .geo .g-cur .c-map { left: -14px; top: -28px; opacity: 0; transform-origin: 14px 28px; }
+  .geo .g-cur.onmap .c-arrow { opacity: 0; }
+  .geo .g-cur.onmap .c-map { opacity: 1; }
+  .geo .g-cur.press .c-arrow { transform: scale(.85); }
+  .geo .g-cur.press .c-map { transform: translateY(2px); }
+  .geo.fade > *:not(.g-cur) { transition: opacity .4s; }
+  /* Дерево РК — анимация */
+  .rk-cmp { display: grid; grid-template-columns: 612fr 612fr 698fr; gap: 16px; padding: 24px; background: #E8EBF2; border-radius: 10px; }
+  .rk-cmp figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .rk-cmp { cursor: zoom-in; }
+  .rk-cmp.big { width: min(100%, 1500px); cursor: default; }
+  .rk-cmp figcaption { font: 500 13px/1.2 var(--font-ui); color: var(--muted); }
+  .rk-cmp .rk-b { position: relative; aspect-ratio: 612 / 919; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 24px rgba(51,63,72,.1); background: #E8ECF2; }
+  .rk-cmp .rk-b.v3 { aspect-ratio: 698 / 919; }
+  .rk-cmp .rk-b img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 720px) { .rk-cmp { grid-template-columns: 1fr; padding: 16px; } }
+  .rkt { --s: .4; position: absolute; left: 0; top: 0; width: 698px; height: 919px; transform-origin: 0 0; transform: scale(var(--s)); overflow: hidden; box-shadow: 0 4px 24px rgba(51,63,72,.1); background: #E8ECF2 url(img/rk-shell.webp) 0 0 / 698px 919px no-repeat; color: #333F48; font-family: var(--font-ui); text-align: left; user-select: none; }
+  .rkt * { box-sizing: border-box; }
+  .rkt .t-view { position: absolute; left: 104px; top: 179px; width: 310px; height: 740px; overflow: hidden; }
+  .rkt .t-list { display: flex; flex-direction: column; padding-bottom: 24px; }
+  .rkt .t-ins { opacity: 0; transition: opacity .45s ease; }
+  .rkt .t-ins.in { opacity: 1; }
+  .rkt .t-gap { padding-top: 8px; }
+  .rkt .t-card { position: relative; display: flex; flex-direction: column; gap: 4px; }
+  .rkt .t-row { display: flex; align-items: center; gap: 8px; }
+  .rkt .t-row svg { display: block; flex: none; }
+  .rkt .t-ttl { flex: 1; font-weight: 600; }
+  .rkt .t-meta { display: flex; gap: 16px; font-size: 10px; line-height: 13px; color: #83868D; }
+  .rkt .t-st { display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 16px; flex: 1; }
+  .rkt .t-tg { width: 28px; height: 16px; border-radius: 100px; background: #0087CD; box-shadow: inset 0 1px 2px rgba(0,0,0,.25); position: relative; flex: none; }
+  .rkt .t-tg::after { content: ""; position: absolute; right: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(51,63,72,.25); }
+  .rkt .t-camp { background: #F6F9FD; border-radius: 8px; padding: 8px 16px 8px 20px; gap: 8px; overflow: hidden; }
+  .rkt .t-camp::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #42E3B4; }
+  .rkt .t-camp .t-ttl { font-size: 16px; line-height: 24px; }
+  .rkt .t-camp .t-meta, .rkt .t-camp .t-row.st, .rkt .t-camp .t-link { margin-left: 28px; }
+  .rkt .t-link { display: flex; align-items: center; gap: 4px; height: 16px; font-size: 12px; font-weight: 600; color: #0087CD; opacity: 0; transition: opacity .3s; }
+  .rkt .t-link.show { opacity: 1; }
+  .rkt .t-link svg { transition: transform .3s; }
+  .rkt .t-link.down svg { transform: rotate(180deg); }
+  .rkt .t-grp { border-radius: 8px; overflow: hidden; background: #fff; }
+  .rkt .t-gcard { padding: 12px 16px; gap: 8px; background: #fff; }
+  .rkt .t-gcard .t-ttl { font-size: 16px; line-height: 24px; }
+  .rkt .t-gcard .t-meta { margin-left: 24px; }
+  .rkt .t-gcard .t-row.st { gap: 12px; }
+  .rkt .t-chev { transition: transform .3s; }
+  .rkt .t-grp.closed .t-chev { transform: rotate(180deg); }
+  .rkt .t-ads { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .4s ease; }
+  .rkt .t-grp.closed .t-ads { grid-template-rows: 0fr; }
+  .rkt .t-ads > div { min-height: 0; overflow: hidden; }
+  .rkt .t-ad { padding: 8px 16px 12px 44px; gap: 8px; background: #F6F9FD; border-top: 1px solid #E8ECF2; }
+  .rkt .t-ad .t-ttl { font-size: 12px; line-height: 20px; }
+  .rkt .t-ad .t-sub { margin-left: 24px; display: flex; flex-direction: column; gap: 2px; font-size: 10px; line-height: 13px; color: #83868D; }
+  .rkt .t-ad .t-sub .t-meta { margin: 0; }
+  .rkt .t-ad .t-row.st { margin-left: 24px; }
+  .rkt .t-bar { position: absolute; right: 4px; top: 4px; width: 8px; border-radius: 24px; background: #ABB0B9; opacity: 0; transition: opacity .3s; }
+  .rkt .t-bar.show { opacity: 1; }
+  .rkt .r-cur { position: absolute; left: 0; top: 0; z-index: 5; transform: translate(760px, 520px); transition: transform .9s cubic-bezier(.45,.05,.25,1); pointer-events: none; }
+  .rkt .r-cur svg { display: block; max-width: none; margin: -2px 0 0 -2px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); transition: transform .12s; }
+  .rkt .r-cur.press svg { transform: scale(.85); }
+  /* ОРД — дополнительные фильтры */
+  .of-stage { position: relative; aspect-ratio: 1440 / 1080; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); background: #0B1620; }
+  .ofp { --s: .63; position: absolute; left: 0; top: 0; width: 1440px; height: 1080px; transform-origin: 0 0; transform: scale(var(--s)); overflow: hidden; background: url(img/of-page.webp) 0 0 / 1440px 1080px no-repeat; color: #333F48; font-family: var(--font-ui); font-size: 16px; line-height: 24px; text-align: left; user-select: none; }
+  .ofp * { box-sizing: border-box; }
+  .ofp svg { display: block; flex: none; max-width: none; }
+  .ofp .of-bar { position: absolute; left: 1050px; top: 191px; width: 342px; height: 44px; display: flex; justify-content: flex-end; gap: 8px; background: #E8ECF2; opacity: 0; transition: opacity .25s; }
+  .ofp.applied .of-bar { opacity: 1; }
+  .ofp .of-ib { height: 44px; min-width: 52px; padding: 0 16px; display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid rgba(51,63,72,.25); border-radius: 6px; }
+  .ofp .of-sep { width: 0; height: 20px; border-left: .5px solid #333F48; }
+  .ofp .of-x { display: grid; place-items: center; width: 16px; height: 20px; }
+  .ofp .of-veil { position: absolute; left: 104px; top: 251px; width: 1288px; height: 732px; background: rgba(255,255,255,.7); opacity: 0; pointer-events: none; }
+  .ofp .of-veil.go { animation: ofVeil .9s ease; }
+  @keyframes ofVeil { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: 0; } }
+  .ofp .of-side { position: absolute; right: 0; top: 0; width: 664px; height: 1080px; background: #fff; box-shadow: 0 8px 16px rgba(29,39,115,.25); transform: translateX(105%); transition: transform .45s cubic-bezier(.3,.7,.2,1); }
+  .ofp.open .of-side { transform: none; }
+  .ofp .of-head { height: 60px; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E8ECF2; font-size: 22px; line-height: 28px; font-weight: 600; }
+  .ofp .of-body { padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .ofp .of-f { display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .ofp .of-f.full { grid-column: 1 / -1; }
+  .ofp .of-f.l { grid-column: 1; }
+  .ofp .of-in { height: 44px; padding: 0 16px; display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid rgba(51,63,72,.25); border-radius: 6px; transition: border-color .2s, box-shadow .2s; }
+  .ofp .of-in.focus { border-color: #00AAB1; box-shadow: 0 0 0 1px #00AAB1; }
+  .ofp .of-in .v { flex: 1; }
+  .ofp .of-in .ph { color: #ABB0B9; }
+  .ofp .of-d { display: grid; grid-template-columns: 100px 20px 100px 1fr; gap: 8px; align-items: center; }
+  .ofp .of-d .cal { justify-self: end; }
+  .ofp .of-d span { white-space: nowrap; }
+  .ofp .of-d .ph { color: #ABB0B9; }
+  .ofp .of-caret::after { content: ""; display: inline-block; width: 1px; height: 20px; margin-left: 1px; vertical-align: -4px; background: #333F48; animation: ofBlink 1s steps(1) infinite; }
+  @keyframes ofBlink { 50% { opacity: 0; } }
+  .ofp .of-menu { position: absolute; left: 0; right: 0; top: 80px; z-index: 2; padding: 6px 0; background: #fff; border-radius: 6px; box-shadow: 0 6px 24px rgba(51,63,72,.18), 0 0 0 1px rgba(51,63,72,.06); opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .2s; }
+  .ofp .of-menu.show { opacity: 1; transform: none; }
+  .ofp .of-menu span { display: block; height: 40px; padding: 8px 16px; }
+  .ofp .of-menu .cur { color: #00AAB1; }
+  .ofp .of-menu .hov { background: #F2F4F7; }
+  .ofp .of-foot { position: absolute; left: 0; right: 0; bottom: 0; height: 68px; padding: 12px 24px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #E8ECF2; background: #fff; }
+  .ofp .of-reset { display: flex; align-items: center; gap: 8px; color: #0087CD; margin-right: auto; }
+  .ofp .of-btn { width: 166px; height: 44px; display: grid; place-items: center; border-radius: 6px; border: 1px solid rgba(51,63,72,.25); background: #fff; }
+  .ofp .of-btn.pri { border: 0; background: #00AAB1; color: #fff; transition: filter .15s; }
+  .ofp .of-btn.pri.press { filter: brightness(.92); }
+  .ofp .of-cur { position: absolute; left: 0; top: 0; z-index: 5; transform: translate(1150px, 760px); transition: transform .9s cubic-bezier(.45,.05,.25,1); pointer-events: none; }
+  .ofp .of-cur svg { margin: -2px 0 0 -2px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.3)); transition: transform .12s; transform-origin: 2px 2px; }
+  .ofp .of-cur.press svg { transform: scale(.85); }
+</style>
+
+</head>
+<body>
+<main class="page">
+  <section class="row" aria-label="О себе">
+    <div class="side">
+      <img class="me" src="img/me.webp" alt="Дарья Шульженко" width="120" height="120">
+      <b class="name-big">Дарья Шульженко</b>
+      <a class="me-link" href="https://www.linkedin.com/in/dariashulzhenko" target="_blank" rel="noopener">LinkedIn<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="intro">
+      <p>Мультидисциплинарный дизайнер: поддерживаю интерфейсы личных кабинетов рекламной платформы SberAds и&nbsp;оператора рекламных данных ОРД от&nbsp;SberAds, определяю и&nbsp;развиваю визуальный язык бренда и&nbsp;слежу за&nbsp;консистентностью.</p>
+      <ul class="chips" aria-label="Чем занимаюсь">
+        <li>UX/UI</li><li>AI-прототипы</li><li>Генерация графики</li><li>Лендинги</li><li>Презентации</li><li>Мерч</li>
+      </ul>
+      <span class="loc">Москва</span>
+    </div>
+  </section>
+
+  <!-- SberAds -->
+  <section class="row" id="sberads" aria-labelledby="sb-t">
+    <div class="side">
+      <span class="badge b-sber" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><path d="M31.8156 15.9962C31.8156 15.0189 31.728 14.0608 31.5603 13.1296L28.1349 15.6666C28.1349 15.7739 28.1387 15.885 28.1387 15.9962C28.1387 22.7794 22.652 28.298 15.9078 28.298C9.16366 28.298 3.6769 22.7794 3.6769 15.9962C3.6769 9.21293 9.16366 3.69437 15.9078 3.69437C18.4645 3.69437 20.8383 4.48766 22.8044 5.84048L25.8983 3.54874C23.1663 1.32982 19.6914 0 15.9078 0C7.12137 0 0 7.16264 0 16C0 24.8374 7.12137 32 15.9078 32C24.6943 32 31.8156 24.8374 31.8156 16V15.9962Z" fill="#16181D"/><path d="M28.4969 6.2122C29.2475 7.18945 29.8915 8.25484 30.4021 9.39304L15.9079 20.1389L9.85336 16.3219V11.7269L15.9079 15.5439L28.4969 6.2122Z" fill="#16181D"/></svg></span>
+      <b id="sb-t">SberAds</b>
+      <span>UX/UI-дизайнер</span>
+      <span class="when m">2023 → сейчас</span>
+    </div>
+    <div class="stack">
+      <article class="project" aria-labelledby="sb-cab">
+        <header class="proj-head">
+          <h3 id="sb-cab">Поддержка рекламного кабинета платформы SberAds</h3>
+          <p>Занимаюсь поддержкой и&nbsp;развитием рекламного кабинета. Сделано: новые таргетинги СуперГео и&nbsp;погодные условия, форма добавления юзерлистов для&nbsp;аудиторий, переработка дерева структуры рекламной кампании, изменение роли пользователей через приглашение, расчёт медиаплана.</p>
+        </header>
+        <div class="case-shot"><img src="img/t/sb-cabinet2.webp" alt="Экран создания рекламной кампании в кабинете SberAds: дерево кампании, лимиты и прогноз охвата" width="1440" height="893"></div>
+        <section class="subproj" aria-labelledby="sb-geo">
+        <header class="proj-head">
+          <h4 id="sb-geo">СуперГео</h4>
+          <p>Выведен в&nbsp;прод таргетинг по&nbsp;точкам на&nbsp;карте с&nbsp;уточнением радиуса показа рекламы.</p>
+        </header>
+        <div class="geo-stage" role="img" aria-label="Анимация блока «География показов»: на карте ставятся две точки, адреса появляются в списке, у второго адреса радиус меняется с 3 до 4,5 км">
+          <div class="geo" id="geo" aria-hidden="true">
+            <div class="g-head"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C10.968 2 9.97271 2.15911 9.03516 2.45117C5.9036 3.4267 3.4267 5.9036 2.45117 9.03516C2.35407 9.34688 2.26962 9.66444 2.20312 9.98828V9.99219C2.07012 10.6412 2 11.3125 2 12C2 12.3444 2.01851 12.6839 2.05273 13.0195C2.08704 13.3546 2.13623 13.6831 2.20312 14.0078V14.0117C2.26988 14.3351 2.35377 14.6534 2.45117 14.9648C3.4267 18.0964 5.9036 20.5733 9.03516 21.5488C9.34688 21.6459 9.66444 21.7304 9.98828 21.7969H9.99219C10.6412 21.9299 11.3125 22 12 22C12.3444 22 12.6839 21.9815 13.0195 21.9473C13.6897 21.8787 14.3396 21.7444 14.9648 21.5488C18.0964 20.5733 20.5733 18.0964 21.5488 14.9648C21.7444 14.3396 21.8787 13.6897 21.9473 13.0195C21.9815 12.6839 22 12.3444 22 12C22 11.6562 21.9816 11.3156 21.9473 10.9805C21.9132 10.6462 21.8633 10.3161 21.7969 9.99219C21.73 9.66748 21.6466 9.34778 21.5488 9.03516C20.5733 5.9036 18.0964 3.4267 14.9648 2.45117C14.6534 2.35377 14.3351 2.26988 14.0117 2.20312H14.0078C13.6831 2.13623 13.3546 2.08704 13.0195 2.05273C12.6839 2.01851 12.3444 2 12 2ZM12 4C12.7294 4 13.7047 5.25627 14.4023 7.37109C14.4487 7.58061 14.4952 7.78984 14.541 8H9.45898C9.5048 7.78984 9.55126 7.58061 9.59766 7.37109C10.2953 5.25627 11.2706 4 12 4ZM8.30859 4.90234C8.22616 5.07955 8.14408 5.25858 8.07031 5.44531C7.87858 5.93063 7.73908 6.46898 7.61328 7.02148C7.53035 7.33951 7.45637 7.66411 7.40039 8H5.09961C5.46366 7.36291 5.89841 6.79639 6.38672 6.29297C6.95082 5.73813 7.59945 5.27073 8.30859 4.90234ZM15.6914 4.90234C15.7105 4.91227 15.731 4.91962 15.75 4.92969C15.7835 4.94687 15.8165 4.96483 15.8496 4.98242C16.2001 5.17453 16.5299 5.39805 16.8457 5.63867C16.9847 5.7451 17.1239 5.85137 17.2539 5.9668C17.3582 6.0576 17.4612 6.15006 17.5605 6.24609C18.0775 6.76012 18.5255 7.34391 18.9004 8H16.5996C16.5459 7.67745 16.4752 7.36475 16.3945 7.05859C16.2669 6.49294 16.1257 5.94138 15.9297 5.44531C15.8559 5.25858 15.7738 5.07955 15.6914 4.90234ZM4.30078 10H7.09961C6.99961 10.6 7 11.3 7 12C7 12.7 6.99961 13.4 7.09961 14H4.30078C4.20078 13.7 4.12422 13.3746 4.07422 13.0371C4.02422 12.6996 4 12.35 4 12C4 11.65 4.02422 11.3004 4.07422 10.9629C4.12422 10.6254 4.20078 10.3 4.30078 10ZM9.15234 10H14.8477C14.9126 10.6633 15 11.3172 15 12C15 12.6828 14.9126 13.3367 14.8477 14H9.15234C9.08743 13.3367 9 12.6828 9 12C9 11.3172 9.08743 10.6633 9.15234 10ZM16.9004 10H19.6992C19.7992 10.3 19.8758 10.6254 19.9258 10.9629C19.9758 11.3004 20 11.65 20 12C20 12.35 19.9758 12.6996 19.9258 13.0371C19.8758 13.3746 19.7992 13.7 19.6992 14H16.9004C17.0004 13.4 17 12.7 17 12C17 11.3 17.0004 10.6 16.9004 10ZM5.09961 16H7.40039C7.45415 16.3225 7.52475 16.6353 7.60547 16.9414C7.73309 17.5071 7.87434 18.0586 8.07031 18.5547C8.14408 18.7414 8.22616 18.9204 8.30859 19.0977C8.28949 19.0877 8.26901 19.0804 8.25 19.0703C8.21649 19.0531 8.18348 19.0352 8.15039 19.0176C7.79988 18.8255 7.47014 18.6019 7.1543 18.3613C7.01526 18.2549 6.87614 18.1486 6.74609 18.0332C6.64185 17.9424 6.53882 17.8499 6.43945 17.7539C5.92248 17.2399 5.47452 16.6561 5.09961 16ZM9.45898 16H14.5C13.9 18.5 12.8 20 12 20C11.2706 20 10.2953 18.7437 9.59766 16.6289C9.55126 16.4194 9.5048 16.2102 9.45898 16ZM16.6992 16H18.9277C18.1675 17.3174 17.0449 18.3946 15.6914 19.0977C15.7738 18.9204 15.8559 18.7414 15.9297 18.5547C16.0946 18.1374 16.2222 17.6827 16.3359 17.2129C16.4628 16.8175 16.593 16.4249 16.6992 16Z" fill="#0087CD"/></svg><span>География показов</span></div>
+            <p class="g-sub">Укажите регионы, адреса или точки на карте, где вы хотите транслировать рекламу.</p>
+            <div class="g-tabs"><span>Список регионов</span><span class="on">Карта</span></div>
+            <div class="g-map">
+              <img src="img/geo-map.webp" alt="" width="596" height="320">
+              <div class="g-ctrl"><svg width="28" height="116" viewBox="0 0 28 116" fill="none" aria-hidden="true"><g filter="url(#gcf0)"><rect x="2" y="1" width="24" height="24" rx="4" fill="#fff"/><path d="M19.5 11.6C19.5 15.6261 15.1209 20 14 20C12.8791 20 8.5 15.6261 8.5 11.6C8.5 8.50721 10.9624 6 14 6C17.0376 6 19.5 8.50721 19.5 11.6Z" stroke="#83868D" stroke-width="2" stroke-linecap="round"/><path d="M16 11.5C16 12.6046 15.1046 13.5 14 13.5C12.8954 13.5 12 12.6046 12 11.5C12 10.3954 12.8954 9.5 14 9.5C15.1046 9.5 16 10.3954 16 11.5Z" fill="#83868D"/></g><g filter="url(#gcf0)"><rect x="2" y="33" width="24" height="24" rx="4" fill="#fff"/><rect x="8" y="39" width="12" height="12" rx="1" stroke="#83868D" stroke-width="2"/><path d="M13.75 40.999C14.1641 40.999 14.4999 41.3349 14.5 41.749C14.5 42.1632 14.1642 42.499 13.75 42.499H12.5605L16.5 46.4395V45.25C16.5 44.8358 16.8358 44.5 17.25 44.5C17.6642 44.5 18 44.8358 18 45.25V48.25C18 48.6642 17.6642 49 17.25 49H14.25C13.8358 49 13.5 48.6642 13.5 48.25C13.5 47.8358 13.8358 47.5 14.25 47.5H15.4395L11.5 43.5596V44.749C11.5 45.1632 11.1642 45.499 10.75 45.499C10.3358 45.499 10 45.1632 10 44.749V41.749C10.0001 41.3349 10.3359 40.9991 10.75 40.999H13.75Z" fill="#83868D"/></g><g filter="url(#gcf0)"><rect x="2" y="65" width="24" height="48" rx="4" fill="#fff"/><path d="M14 70.9995C14.5523 70.9995 15 71.4472 15 71.9995V75.9995H19C19.5523 75.9995 20 76.4472 20 76.9995C20 77.5518 19.5523 77.9995 19 77.9995H15V81.9995C15 82.5518 14.5523 82.9995 14 82.9995C13.4477 82.9995 13 82.5518 13 81.9995V77.9995H9C8.44772 77.9995 8 77.5518 8 76.9995C8 76.4472 8.44772 75.9995 9 75.9995H13V71.9995C13 71.4472 13.4477 70.9995 14 70.9995Z" fill="#83868D"/><path d="M9.33279 101H18.6672" stroke="#83868D" stroke-width="2" stroke-linecap="round"/></g><defs><filter id="gcf0" x="-10" y="-10" width="48" height="140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#333F48" flood-opacity=".25"/></filter></defs></svg></div>
+              <div class="g-pt" id="gP1" style="left:273px;top:84px;--r:60"><i class="g-rad"></i><span class="g-pin"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="9" r="9" fill="url(#gpb1)"/><path d="M13 17H15V27C15 27.5523 14.5523 28 14 28C13.4477 28 13 27.5523 13 27V17Z" fill="#184EA1"/><circle opacity=".7" cx="10.5" cy="4.5" r="1.5" fill="#fff"/><defs><radialGradient id="gpb1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.75 7.5) rotate(90) scale(8.25)"><stop stop-color="#0087CD"/><stop offset="1" stop-color="#184EA1"/></radialGradient></defs></svg><svg class="grey" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="9" r="9" fill="url(#gpg1)"/><path d="M13 17H15V27C15 27.5523 14.5523 28 14 28C13.4477 28 13 27.5523 13 27V17Z" fill="#45525B"/><circle opacity=".7" cx="10.5" cy="4.5" r="1.5" fill="#fff"/><defs><radialGradient id="gpg1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.75 7.5) rotate(90) scale(8.25)"><stop stop-color="#79868F"/><stop offset="1" stop-color="#45525B"/></radialGradient></defs></svg></span></div>
+              <div class="g-pt" id="gP2" style="left:363px;top:177px;--r:40"><i class="g-rad"></i><span class="g-pin"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="9" r="9" fill="url(#gpb2)"/><path d="M13 17H15V27C15 27.5523 14.5523 28 14 28C13.4477 28 13 27.5523 13 27V17Z" fill="#184EA1"/><circle opacity=".7" cx="10.5" cy="4.5" r="1.5" fill="#fff"/><defs><radialGradient id="gpb2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.75 7.5) rotate(90) scale(8.25)"><stop stop-color="#0087CD"/><stop offset="1" stop-color="#184EA1"/></radialGradient></defs></svg><svg class="grey" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="9" r="9" fill="url(#gpg2)"/><path d="M13 17H15V27C15 27.5523 14.5523 28 14 28C13.4477 28 13 27.5523 13 27V17Z" fill="#45525B"/><circle opacity=".7" cx="10.5" cy="4.5" r="1.5" fill="#fff"/><defs><radialGradient id="gpg2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.75 7.5) rotate(90) scale(8.25)"><stop stop-color="#79868F"/><stop offset="1" stop-color="#45525B"/></radialGradient></defs></svg></span></div>
+              <div class="g-tip" id="gTip"><span id="gTipA">Москва, Оружейный переулок, 41</span><span class="g-sp"><span id="gTipK">5 км</span><svg width="9" height="6" viewBox="41.6 9.9 10.8 6.3" aria-hidden="true"><path d="M50.2929 10.274C50.6834 9.90867 51.3166 9.90867 51.7071 10.274C52.0976 10.6393 52.0976 11.2316 51.7071 11.5969L47 16L42.2929 11.5969C41.9024 11.2316 41.9024 10.6393 42.2929 10.274C42.6834 9.90867 43.3166 9.90867 43.7071 10.274L47 13.3542L50.2929 10.274Z" fill="#0087CD"/></svg></span><svg class="g-del" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M15.6525 17.1662L16.4094 8.08318C16.458 7.50016 15.9979 7.00013 15.4129 7.00013L4.58646 7.00013C4.00142 7.00013 3.54133 7.50016 3.58991 8.08318L4.34684 17.1662C4.43322 18.2028 5.29975 19.0001 6.33993 19.0001L13.6594 19.0001C14.6996 19.0001 15.5661 18.2028 15.6525 17.1662Z" fill="#83868D"/><path d="M7.99983 3.00016L2.99983 3.00016C2.44755 3.00016 1.99983 3.44788 1.99983 4.00016C1.99983 4.55245 2.44755 5.00016 2.99983 5.00016L16.9998 5.00016C17.5521 5.00016 17.9998 4.55245 17.9998 4.00016C17.9998 3.44788 17.5521 3.00016 16.9998 3.00016L11.9998 3.00016L11.9998 2C11.9998 1.44772 11.5521 1 10.9998 1L8.99983 1C8.44755 1 7.99983 1.44772 7.99983 2L7.99983 3.00016Z" fill="#83868D"/></svg></div>
+            </div>
+            <div class="g-lbl">Поиск по адресу</div>
+            <div class="g-input">Пример: Москва, Строителей, 33</div>
+            <div class="g-empty"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M17.2639 14.3823C17.5462 12.6192 18.963 11.2567 20.7358 11.0434L50.2559 7.49234C52.8411 7.18136 55.0295 9.38405 54.7018 11.9672L49.3128 54.4414C49.0273 56.6911 46.9308 58.2538 44.6933 57.8846L15.1115 53.003C12.9392 52.6445 11.465 50.5979 11.8131 48.4239L17.2639 14.3823Z" fill="#D2DAE7"/><mask id="gmk0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="11" y="7" width="44" height="51"><path d="M17.2639 14.3823C17.5462 12.6192 18.963 11.2567 20.7358 11.0434L50.2559 7.49234C52.8411 7.18136 55.0295 9.38405 54.7018 11.9672L49.3128 54.4414C49.0273 56.6911 46.9308 58.2538 44.6933 57.8846L15.1116 53.003C12.9392 52.6445 11.465 50.5979 11.8131 48.4239L17.2639 14.3823Z" fill="#D2DAE7"/></mask><g mask="url(#gmk0)"><path d="M23.2242 54.9916L26.3013 39.6065C27.1975 35.1252 31.0177 31.8217 35.5815 31.5815L37.1138 31.5008C41.8765 31.2502 45.7994 27.671 46.4845 22.9512L49.4463 2.54736" stroke="#E8ECF2" stroke-width="5"/><path d="M36.6731 12.9553L36.3955 16.0626C36.3432 16.6477 36.8041 17.1516 37.3915 17.1516H40.6518C41.1573 17.1516 41.5834 16.7743 41.6445 16.2724L42.0584 12.8713C42.1352 12.2408 41.6124 11.6994 40.9796 11.7542L37.5829 12.048C37.0998 12.0898 36.7162 12.4722 36.6731 12.9553Z" fill="#E8ECF2"/><path d="M32.6582 41.185L31.441 47.9406C31.3373 48.5161 31.7474 49.0573 32.3295 49.1133L38.8707 49.7419C39.417 49.7944 39.9036 49.3968 39.9609 48.8509L40.7362 41.4667C40.7981 40.8764 40.3352 40.3623 39.7416 40.3623H33.6424C33.1585 40.3623 32.744 40.7088 32.6582 41.185Z" fill="#E8ECF2"/><g filter="url(#gmf0)"><path d="M34.9277 16.1128C34.3575 14.5192 33.4189 13.2113 32.1994 12.3106C30.9798 11.4098 29.5188 10.9455 27.9522 10.9608C27.454 10.9629 26.9496 11.0052 26.4422 11.0872C24.8485 11.3363 23.25 12.0566 21.7953 13.1811C20.3407 14.3056 19.077 15.7978 18.122 17.5189C17.0949 19.3142 16.4155 21.2972 16.1453 23.2886C15.875 25.2799 16.0225 27.2169 16.5742 28.9244C16.8808 29.8146 17.2965 30.6265 17.8106 31.3387L23.2845 39.3096C23.3524 39.4084 23.4404 39.4846 23.5427 39.5332C23.6451 39.5818 23.7596 39.6017 23.8789 39.5918C23.9982 39.5818 24.1196 39.5421 24.2354 39.4752C24.3512 39.4084 24.4587 39.3159 24.5511 39.2036L32.0031 30.1512C32.6941 29.338 33.3083 28.4399 33.8297 27.4806C34.7928 25.6464 35.3976 23.6465 35.5893 21.6617C35.781 19.677 35.5536 17.7699 34.9277 16.1128Z" fill="#B2BECD" fill-opacity=".5"/></g></g><path d="M23.8117 5.8272C25.3659 6.04522 26.7582 6.72933 27.7198 7.4087C28.7209 8.11593 29.8601 9.44986 30.3658 11.0431C30.9208 12.7001 31.1078 14.2335 30.9378 16.2181C30.7678 18.2027 30.2311 20.2028 29.3771 22.0369C28.9147 22.9961 28.3701 23.8943 27.7574 24.7075L20.0489 34.1414C19.9669 34.2536 19.8714 34.3461 19.7687 34.413C19.6662 34.4797 19.5586 34.5195 19.4529 34.5295C19.395 34.5349 19.1256 34.4936 19.0712 34.4814L16.4202 34.0706L17.3364 31.2285L13.6731 25.8947C13.1591 25.1826 12.7439 24.3701 12.4374 23.4801C11.8858 21.7727 11.7381 19.8354 12.0083 17.8443C12.2786 15.8531 12.9579 13.8699 13.9848 12.0748C14.9399 10.3538 16.2035 8.86143 17.658 7.737C18.7319 6.90688 19.8847 6.29785 21.0556 5.93526L21.6371 5.49268L23.8117 5.8272Z" fill="url(#gml2)"/><path d="M27.5667 10.5923C26.9965 8.99873 26.058 7.69079 24.8384 6.79005C23.6189 5.8893 22.1579 5.425 20.5912 5.44031C20.0931 5.44244 19.5886 5.48465 19.0812 5.56665C17.4875 5.81579 15.889 6.53609 14.4344 7.66059C12.9797 8.78509 11.7161 10.2773 10.761 11.9984C9.7339 13.7937 9.05453 15.7767 8.7843 17.7681C8.51407 19.7594 8.66149 21.6964 9.21325 23.4039C9.5198 24.2941 9.93557 25.106 10.4496 25.8182L15.9236 33.7891C15.9914 33.8879 16.0794 33.9641 16.1818 34.0127C16.2841 34.0613 16.3986 34.0812 16.5179 34.0713C16.6372 34.0613 16.7587 34.0216 16.8744 33.9547C16.9902 33.8879 17.0978 33.7954 17.1902 33.6831L24.6421 24.6307C25.3331 23.8175 25.9473 22.9194 26.4688 21.9601C27.4319 20.1259 28.0366 18.126 28.2283 16.1412C28.42 14.1565 28.1926 12.2494 27.5667 10.5923Z" fill="#F8F9FC"/><defs><filter id="gmf0" x="13" y="8" width="26" height="35" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="1.5"/></filter><linearGradient id="gml2" x1="22.1177" y1="5.51685" x2="22.1177" y2="34.15" gradientUnits="userSpaceOnUse"><stop stop-color="#E0E7F0"/><stop offset="1" stop-color="#A8B7CB"/></linearGradient></defs></svg><b>Места не добавлены</b><span>Поставьте точку на карте или введите адрес в поле выше</span></div>
+            <div class="g-list">
+              <div class="g-lh"><span>Выбранные места (<span id="gCnt">1</span>)</span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.0894 5.1857C17.8705 5.96675 17.8705 7.23308 17.0894 8.01412L10.1035 15H16.6753C17.2276 15 17.6753 15.4477 17.6753 16C17.6753 16.5523 17.2276 17 16.6753 17H7.25C7.22761 17 7.2054 16.9993 7.18338 16.9978C6.70256 16.9759 6.22816 16.7813 5.86099 16.4141L3.03256 13.5857C2.25152 12.8047 2.25152 11.5383 3.03256 10.7573L11.4326 2.35727C12.2136 1.57622 13.4799 1.57622 14.261 2.35727L17.0894 5.1857ZM12.4932 3.41793L8.41021 7.50094L11.9457 11.0365L16.0288 6.95346C16.224 6.7582 16.224 6.44162 16.0288 6.24636L13.2003 3.41793C13.0051 3.22267 12.6885 3.22267 12.4932 3.41793Z" fill="#0087CD"/></svg></div>
+              <div class="g-row" id="gR1"><div><span>Москва, Оружейный переулок, 41</span><small>55.772, 37.598</small></div><span class="g-sp"><span>5 км</span><svg width="12" height="8" viewBox="41.6 9.9 10.8 6.3" aria-hidden="true"><path d="M50.2929 10.274C50.6834 9.90867 51.3166 9.90867 51.7071 10.274C52.0976 10.6393 52.0976 11.2316 51.7071 11.5969L47 16L42.2929 11.5969C41.9024 11.2316 41.9024 10.6393 42.2929 10.274C42.6834 9.90867 43.3166 9.90867 43.7071 10.274L47 13.3542L50.2929 10.274Z" fill="#0087CD"/></svg></span></div>
+              <div class="g-row" id="gR2"><div><span>Москва, Улица Мельникова, 24</span><small>55.728, 37.676</small></div><span class="g-sp" id="gSp2"><span id="gK2">3 км</span><svg width="12" height="8" viewBox="41.6 9.9 10.8 6.3" aria-hidden="true"><path d="M50.2929 10.274C50.6834 9.90867 51.3166 9.90867 51.7071 10.274C52.0976 10.6393 52.0976 11.2316 51.7071 11.5969L47 16L42.2929 11.5969C41.9024 11.2316 41.9024 10.6393 42.2929 10.274C42.6834 9.90867 43.3166 9.90867 43.7071 10.274L47 13.3542L50.2929 10.274Z" fill="#0087CD"/></svg></span></div>
+            </div>
+            <div class="g-menu" id="gMenu"><div class="g-mscroll" id="gMs"><span>0,5 км</span><span>1 км</span><span>1,5 км</span><span>2 км</span><span>2,5 км</span><span class="cur" id="gM3">3 км</span><span>3,5 км</span><span>4 км</span><span id="gM45">4,5 км</span><span>5 км</span><span>5,5 км</span><span>6 км</span><span>6,5 км</span><span>7 км</span><span>7,5 км</span><span>8 км</span><span>8,5 км</span><span>9 км</span><span>9,5 км</span><span>10 км</span></div><i class="g-mbar"></i></div>
+                        <div class="g-cur" id="gCur"><svg class="c-arrow" width="20" height="26" viewBox="0 0 20 26" aria-hidden="true"><path d="M1.5 1.5v19.2l4.6-4.3 3 7 3.2-1.4-3-6.9h6.3z" fill="#16181D" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg><img class="c-map" src="img/geo-cursor.webp" alt="" width="28" height="56"></div>
+          </div>
+        </div>
+        </section>
+        <section class="subproj" aria-labelledby="sb-tree">
+        <header class="proj-head">
+          <h4 id="sb-tree">Дерево рекламной кампании</h4>
+          <p>Проблема: в&nbsp;карточках дерева при&nbsp;большом количестве групп и&nbsp;объявлений терялась иерархия, и&nbsp;было визуально сложно разделить информацию.</p>
+          <p>До&nbsp;этого команда переработала карточки и&nbsp;улучшила восприятие, но&nbsp;при большом количестве они занимают много места и&nbsp;нет быстрой навигации.</p>
+          <p>Я&nbsp;объединила первый и&nbsp;второй варианты, оставив разделения между группами, уменьшила высоту карточки и&nbsp;добавила скроллбар для&nbsp;быстрого просмотра списка без&nbsp;изменения положения основной зоны.</p>
+        </header>
+        <div class="rk-cmp" role="button" tabindex="0" data-title="Дерево рекламной кампании · V1, V2, V3" aria-label="Открыть сравнение вариантов крупно">
+          <figure><figcaption>V1</figcaption><div class="rk-b"><img src="img/f/rk-v1.webp" alt="Вариант 1: дерево кампании списком" width="800" height="1201" loading="lazy"></div></figure>
+          <figure><figcaption>V2</figcaption><div class="rk-b"><img src="img/f/rk-v2.webp" alt="Вариант 2: крупные карточки с названиями групп" width="800" height="1201" loading="lazy"></div></figure>
+          <figure><figcaption>V3</figcaption><div class="rk-b v3" role="img" aria-label="Вариант 3, анимация: новая группа создаётся сверху, её объявления появляются снизу вверх, затем все группы сворачиваются, разворачиваются и дерево прокручивается">
+          <div class="rkt" id="rkt" aria-hidden="true">
+            <div class="t-view" id="rkView"><div class="t-list" id="rkList"></div><i class="t-bar" id="rkBar"></i></div>
+            <div class="r-cur" id="rkCur"><svg width="20" height="26" viewBox="0 0 20 26"><path d="M1.5 1.5v19.2l4.6-4.3 3 7 3.2-1.4-3-6.9h6.3z" fill="#16181D" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          </div>
+          </div></figure>
+        </div>
+        </section>
+      </article>
+      <hr class="proj-div">
+      <article class="project" aria-labelledby="ord-cab">
+        <header class="proj-head">
+          <h3 id="ord-cab">Поддержка личного кабинета ОРД от&nbsp;SberAds</h3>
+          <p>Занимаюсь поддержкой и&nbsp;развитием личного кабинета. Сделано: вывод основных фильтров над&nbsp;таблицей и&nbsp;перенос дополнительных в&nbsp;сайдбар, быстрая справка личного кабинета, пересмотр вида таблиц для&nbsp;лучшего восприятия, изменения флоу создания креатива и&nbsp;акта, доработка центра уведомлений, улучшение UI (изменение иконок, цветов, отступов).</p>
+        </header>
+        <div class="case-shot"><img src="img/t/ord-cabinet.webp" alt="Панель управления личного кабинета ОРД: сроки передачи статистики, новые уведомления и ошибки, полезные материалы" width="1600" height="1218" loading="lazy"></div>
+        <section class="subproj" aria-labelledby="ord-flt">
+          <header class="proj-head">
+            <h4 id="ord-flt">Дополнительные фильтры</h4>
+            <p>Дополнительные фильтры были реализованы через выпадающий аккордеон над&nbsp;таблицей, который опускал её вниз: при&nbsp;большом количестве фильтров они могли занимать весь экран, и&nbsp;таблицы не&nbsp;было видно. Также все фильтры были убраны в&nbsp;дополнительные.</p>
+          <p>Было принято решение вывести несколько основных фильтров над&nbsp;таблицей, а&nbsp;дополнительные перенести в&nbsp;сайдбар.</p>
+          </header>
+          <div class="of-stage" role="img" aria-label="Анимация: открывается панель дополнительных фильтров, вводится период даты добавления, выбирается социальная реклама «Да», фильтры применяются и на кнопке появляется отметка">
+            <div class="ofp" id="ofp" aria-hidden="true">
+              <i class="of-veil" id="ofVeil"></i>
+              <div class="of-bar"><span class="of-dd"><svg width="130" height="44" viewBox="0 0 130 44" fill="none" aria-hidden="true"><rect width="130" height="44" rx="6" fill="white"/><rect x="0.5" y="0.5" width="129" height="43" rx="5.5" stroke="#333F48" stroke-opacity="0.25"/><path d="M16.4834 26.72H17.6674C17.9874 25.9413 18.2808 24.912 18.5474 23.632C18.8248 22.352 18.9741 20.848 18.9954 19.12L19.0274 16.8H25.8114V26.72H27.2514V30.08H25.9074V28H17.8274V30.08H16.4834V26.72ZM24.3714 18.08H20.4194L20.4034 19.168C20.3928 19.904 20.3501 20.6293 20.2754 21.344C20.2114 22.048 20.1208 22.7253 20.0034 23.376C19.8968 24.0267 19.7688 24.6347 19.6194 25.2C19.4808 25.7653 19.3314 26.272 19.1714 26.72H24.3714V18.08ZM29.8118 24.24C29.8118 25.1573 30.0465 25.8453 30.5158 26.304C30.9958 26.752 31.7051 26.976 32.6438 26.976C33.1878 26.976 33.6785 26.8853 34.1158 26.704C34.5531 26.512 34.9265 26.2933 35.2358 26.048V27.424C35.0225 27.5733 34.6918 27.7387 34.2438 27.92C33.7958 28.0907 33.2518 28.176 32.6118 28.176C31.9291 28.176 31.3265 28.096 30.8038 27.936C30.2918 27.7653 29.8598 27.4987 29.5078 27.136C29.1665 26.7627 28.9051 26.2933 28.7238 25.728C28.5531 25.152 28.4678 24.4533 28.4678 23.632C28.4678 22.2347 28.7931 21.1733 29.4438 20.448C30.0945 19.7227 31.0438 19.36 32.2918 19.36C32.9425 19.36 33.4971 19.456 33.9558 19.648C34.4145 19.84 34.7825 20.112 35.0598 20.464C35.3371 20.816 35.5398 21.2427 35.6678 21.744C35.7958 22.2347 35.8598 22.7787 35.8598 23.376V24.24H29.8118ZM32.2758 20.56C31.4971 20.56 30.8891 20.768 30.4518 21.184C30.0251 21.5893 29.8118 22.224 29.8118 23.088H34.5318C34.5318 22.224 34.3505 21.5893 33.9878 21.184C33.6358 20.768 33.0651 20.56 32.2758 20.56ZM38.0563 19.52H39.3843V23.648C39.3843 24.1493 39.3736 24.6347 39.3523 25.104C39.331 25.5627 39.3096 25.8987 39.2883 26.112L39.3523 26.144C39.555 25.8027 39.7683 25.472 39.9923 25.152C40.2163 24.8213 40.4456 24.496 40.6803 24.176L43.8963 19.52H45.0643V28H43.7363V24.576C43.7363 24.2667 43.7363 23.9573 43.7363 23.648C43.747 23.328 43.7576 23.024 43.7683 22.736C43.779 22.448 43.7896 22.1867 43.8003 21.952C43.811 21.7067 43.8216 21.5093 43.8323 21.36L43.7843 21.344C43.6456 21.5893 43.4643 21.8987 43.2403 22.272C43.0163 22.6347 42.7816 22.976 42.5363 23.296L39.2403 28H38.0563V19.52ZM40.3123 15.84C40.355 16.2453 40.4616 16.5653 40.6323 16.8C40.8136 17.0347 41.1283 17.152 41.5763 17.152C42.0243 17.152 42.339 17.0347 42.5203 16.8C42.7123 16.5653 42.8296 16.2453 42.8723 15.84H44.0563C43.971 16.6293 43.7043 17.2 43.2563 17.552C42.819 17.904 42.259 18.08 41.5763 18.08C40.8936 18.08 40.3283 17.904 39.8803 17.552C39.443 17.2 39.1816 16.6293 39.0963 15.84H40.3123ZM53.5464 21.296C53.2904 21.1147 52.9598 20.96 52.5544 20.832C52.1491 20.6933 51.7064 20.624 51.2264 20.624C50.8424 20.624 50.4904 20.6773 50.1704 20.784C49.8504 20.88 49.5731 21.0453 49.3384 21.28C49.1144 21.5147 48.9384 21.8347 48.8104 22.24C48.6931 22.6347 48.6344 23.1253 48.6344 23.712C48.6344 24.3093 48.6984 24.8107 48.8264 25.216C48.9544 25.6213 49.1411 25.952 49.3864 26.208C49.6424 26.4533 49.9464 26.6293 50.2984 26.736C50.6611 26.8427 51.0771 26.896 51.5464 26.896C51.9838 26.896 52.3998 26.832 52.7944 26.704C53.1998 26.576 53.5411 26.3947 53.8184 26.16V27.6C53.5944 27.7813 53.2691 27.92 52.8424 28.016C52.4264 28.1227 51.9304 28.176 51.3544 28.176C50.7144 28.176 50.1384 28.1013 49.6264 27.952C49.1251 27.792 48.6984 27.5307 48.3464 27.168C47.9944 26.8053 47.7224 26.336 47.5304 25.76C47.3491 25.1733 47.2584 24.4533 47.2584 23.6C47.2584 22.1387 47.5998 21.0667 48.2824 20.384C48.9758 19.7013 50.0158 19.36 51.4024 19.36C51.9251 19.36 52.3518 19.4027 52.6824 19.488C53.0131 19.5627 53.3011 19.664 53.5464 19.792V21.296ZM57.6634 20.768H54.9114V19.52H61.7274V20.768H58.9914V28H57.6634V20.768ZM63.2501 19.504C63.5594 19.4827 63.9487 19.4613 64.4181 19.44C64.8981 19.4187 65.4687 19.408 66.1301 19.408C66.8127 19.408 67.3727 19.456 67.8101 19.552C68.2474 19.648 68.5941 19.7813 68.8501 19.952C69.1061 20.1227 69.2821 20.336 69.3781 20.592C69.4847 20.8373 69.5381 21.1093 69.5381 21.408C69.5381 21.952 69.4154 22.3893 69.1701 22.72C68.9247 23.04 68.4981 23.2853 67.8901 23.456C68.6047 23.52 69.1221 23.696 69.4421 23.984C69.7727 24.272 69.9381 24.768 69.9381 25.472C69.9381 25.8667 69.8794 26.2293 69.7621 26.56C69.6447 26.88 69.4421 27.1573 69.1541 27.392C68.8767 27.6267 68.4981 27.808 68.0181 27.936C67.5487 28.064 66.9621 28.128 66.2581 28.128C65.9807 28.128 65.6927 28.1227 65.3941 28.112C65.1061 28.112 64.8287 28.1067 64.5621 28.096C64.2954 28.0853 64.0501 28.0693 63.8261 28.048C63.6021 28.0373 63.4101 28.0267 63.2501 28.016V19.504ZM64.5781 26.896C64.8554 26.9173 65.1327 26.9387 65.4101 26.96C65.6981 26.9707 65.9967 26.976 66.3061 26.976C66.7434 26.976 67.1061 26.9547 67.3941 26.912C67.6927 26.8587 67.9327 26.7733 68.1141 26.656C68.2954 26.5387 68.4234 26.384 68.4981 26.192C68.5727 26 68.6101 25.7653 68.6101 25.488C68.6101 25.008 68.4447 24.6773 68.1141 24.496C67.7941 24.304 67.2714 24.208 66.5461 24.208H64.5781V26.896ZM66.5461 23.072C67.0474 23.072 67.4474 22.9707 67.7461 22.768C68.0447 22.5653 68.1941 22.24 68.1941 21.792C68.1941 21.312 68.0447 20.9867 67.7461 20.816C67.4581 20.6453 66.9514 20.56 66.2261 20.56C65.8207 20.56 65.4901 20.56 65.2341 20.56C64.9781 20.56 64.7594 20.5653 64.5781 20.576V23.072H66.5461ZM72.1376 19.52H73.4656V23.648C73.4656 24.1493 73.4549 24.6347 73.4336 25.104C73.4122 25.5627 73.3909 25.8987 73.3696 26.112L73.4336 26.144C73.6362 25.8027 73.8496 25.472 74.0736 25.152C74.2976 24.8213 74.5269 24.496 74.7616 24.176L77.9776 19.52H79.1456V28H77.8176V24.576C77.8176 24.2667 77.8176 23.9573 77.8176 23.648C77.8282 23.328 77.8389 23.024 77.8496 22.736C77.8602 22.448 77.8709 22.1867 77.8816 21.952C77.8922 21.7067 77.9029 21.5093 77.9136 21.36L77.8656 21.344C77.7269 21.5893 77.5456 21.8987 77.3216 22.272C77.0976 22.6347 76.8629 22.976 76.6176 23.296L73.3216 28H72.1376V19.52ZM83.3717 24.736C83.0304 24.6827 82.7477 24.5813 82.5237 24.432C82.2997 24.272 82.1237 24.0853 81.9957 23.872C81.8677 23.648 81.777 23.3973 81.7237 23.12C81.6704 22.832 81.6437 22.5333 81.6437 22.224C81.6437 21.776 81.7024 21.3813 81.8197 21.04C81.9477 20.688 82.161 20.3947 82.4597 20.16C82.7584 19.9253 83.153 19.7493 83.6437 19.632C84.1344 19.504 84.7424 19.44 85.4677 19.44C85.937 19.44 86.4224 19.4507 86.9237 19.472C87.425 19.4827 87.8304 19.5093 88.1397 19.552V28H86.8117V24.96H84.7317L82.5557 28H81.0197L83.3717 24.736ZM86.8117 20.672C86.609 20.6507 86.4064 20.6347 86.2037 20.624C86.001 20.6133 85.7184 20.608 85.3557 20.608C84.8757 20.608 84.481 20.64 84.1717 20.704C83.8624 20.7573 83.617 20.848 83.4357 20.976C83.265 21.104 83.1424 21.2747 83.0677 21.488C83.0037 21.6907 82.9717 21.9467 82.9717 22.256C82.9717 22.896 83.1264 23.3333 83.4357 23.568C83.7557 23.8027 84.289 23.92 85.0357 23.92H86.8117V20.672Z" fill="#333F48"/><path fill-rule="evenodd" clip-rule="evenodd" d="M109.293 19.274C109.683 18.9087 110.317 18.9087 110.707 19.274C111.098 19.6393 111.098 20.2316 110.707 20.5969L106.683 24.361C106.299 24.7206 105.701 24.7206 105.317 24.361L101.293 20.5969C100.902 20.2316 100.902 19.6393 101.293 19.274C101.683 18.9087 102.317 18.9087 102.707 19.274L106 22.3542L109.293 19.274Z" fill="#83868D"/></svg></span><span class="of-ib"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3V13H7V15H2C1.44772 15 1 14.5523 1 14V2C1 1.44772 1.44772 1 2 1H14C14.5523 1 15 1.44772 15 2V7H13V3H3Z" fill="#83868D"/><path d="M3 5H13V7H3V5Z" fill="#83868D"/><path d="M2 9H8V11H2V9Z" fill="#83868D"/><path d="M14 8C13.4477 8 13 8.44772 13 9V9.65156C13 9.97531 12.7664 10.2512 12.4605 10.3571C12.1627 10.4602 11.8283 10.4143 11.6055 10.1914L11.1719 9.75781C10.7814 9.36733 10.1483 9.36733 9.75781 9.75781C9.36733 10.1483 9.36733 10.7814 9.75781 11.1719L10.2015 11.6156C10.4245 11.8385 10.4644 12.1819 10.343 12.4729C10.2171 12.775 9.93899 13 9.61174 13H9C8.44772 13 8 13.4477 8 14C8 14.5523 8.44772 15 9 15H9.61174C9.93899 15 10.2171 15.225 10.343 15.5271C10.4644 15.8181 10.4245 16.1615 10.2015 16.3844L9.75781 16.8281C9.36733 17.2186 9.36733 17.8517 9.75781 18.2422C10.1483 18.6327 10.7814 18.6327 11.1719 18.2422L11.6055 17.8086C11.8283 17.5857 12.1627 17.5398 12.4605 17.6429C12.7664 17.7488 13 18.0247 13 18.3484V19C13 19.5523 13.4477 20 14 20C14.5523 20 15 19.5523 15 19V18.3484C15 18.0247 15.2336 17.7488 15.5395 17.6429C15.8373 17.5398 16.1717 17.5857 16.3945 17.8086L16.8281 18.2422C17.2186 18.6327 17.8517 18.6327 18.2422 18.2422C18.6327 17.8517 18.6327 17.2186 18.2422 16.8281L17.7985 16.3844C17.5755 16.1615 17.5356 15.8181 17.657 15.5271C17.7829 15.225 18.061 15 18.3883 15H19C19.5523 15 20 14.5523 20 14C20 13.4477 19.5523 13 19 13H18.3883C18.061 13 17.7829 12.775 17.657 12.4729C17.5356 12.1819 17.5755 11.8385 17.7985 11.6156L18.2422 11.1719C18.6327 10.7814 18.6327 10.1483 18.2422 9.75781C17.8517 9.36733 17.2186 9.36733 16.8281 9.75781L16.3945 10.1914C16.1717 10.4143 15.8373 10.4602 15.5395 10.3571C15.2336 10.2512 15 9.97531 15 9.65156V9C15 8.44772 14.5523 8 14 8ZM14 12C14.75 12 15.1852 12.2452 15.502 12.6016C15.8187 12.9579 16 13.4722 16 14C16 14.5278 15.8187 15.0421 15.502 15.3984C15.1852 15.7548 14.75 16 14 16C13.25 16 12.8148 15.7548 12.498 15.3984C12.1813 15.0421 12 14.5278 12 14C12 13.4722 12.1813 12.9579 12.498 12.6016C12.8148 12.2452 13.25 12 14 12Z" fill="#83868D"/></svg></span><span class="of-ib of-fa"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M11.5361 6.02692C12.1054 7.01609 13.0813 7.73829 14.2344 7.96307L10.7627 11.7706C10.5937 11.9559 10.5001 12.1986 10.5 12.45V17.9099C10.5 18.018 10.4311 18.1142 10.3291 18.1485L7.8291 18.9869C7.66729 19.0411 7.50011 18.9198 7.5 18.7484V13.4122C7.49996 13.187 7.42443 12.9687 7.28613 12.7917L2.31738 6.43339C2.18887 6.26849 2.30617 6.02692 2.51465 6.02692H11.5361Z" fill="#83868D"/><path d="M11.5361 2.00538C11.1956 2.597 11 3.28347 11 4.01615H2C1.44772 4.01615 1 3.56603 1 3.01077C1 2.45551 1.44772 2.00538 2 2.00538H11.5361Z" fill="#83868D"/><circle cx="15" cy="4.02" r="3" fill="#FF3D00"/></svg><i class="of-sep"></i><span class="of-x" id="ofX"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M10.9091 0L6 4.90909L1.09091 0L0 1.09091L4.90909 6L0 10.9091L1.09091 12L6 7.09091L10.9091 12L12 10.9091L7.09091 6L12 1.09091L10.9091 0Z" fill="#83868D"/></svg></span></span><span class="of-ib"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.9998 1C5.19601 1 1.26274 4.77051 1.00194 9.50078C0.980789 9.82422 1.1341 10.1336 1.40548 10.3129C1.67686 10.4904 2.02402 10.5098 2.31302 10.3621C2.60203 10.2145 2.79058 9.92266 2.80292 9.59922C3.01262 5.8041 6.13879 2.8 9.9998 2.8C12.0686 2.8 13.9243 3.6666 15.2371 5.05H14.0599C13.7339 5.04473 13.4326 5.21523 13.2687 5.49648C13.1031 5.77598 13.1031 6.12402 13.2687 6.40352C13.4326 6.68477 13.7339 6.85527 14.0599 6.85H16.8848C16.987 6.86758 17.091 6.86758 17.1949 6.85H18.0712C18.3474 6.85 18.5712 6.62614 18.5712 6.35V2.35C18.5747 2.10742 18.4796 1.87363 18.3069 1.70137C18.1342 1.5291 17.8998 1.43418 17.6549 1.4377C17.1579 1.44473 16.7597 1.85254 16.7667 2.35V4.0498C15.112 2.17949 12.6907 1 9.9998 1ZM18.1342 9.5377C17.6355 9.5166 17.2161 9.90332 17.1967 10.4008C16.987 14.1959 13.8608 17.2 9.9998 17.2C7.93096 17.2 6.07711 16.3334 4.7625 14.95H5.93966C6.26567 14.9553 6.56701 14.7848 6.73089 14.5035C6.89654 14.224 6.89654 13.876 6.73089 13.5965C6.56701 13.3152 6.26567 13.1447 5.93966 13.15H3.10602C3.01086 13.1359 2.9157 13.1359 2.82054 13.15H1.92839C1.65225 13.15 1.42839 13.3739 1.42839 13.65V17.65C1.4231 17.9752 1.59404 18.2758 1.87599 18.4393C2.15619 18.6045 2.5051 18.6045 2.7853 18.4393C3.06725 18.2758 3.23818 17.9752 3.2329 17.65V15.9502C4.88762 17.8205 7.3089 19 9.9998 19C14.8036 19 18.7369 15.2295 18.9977 10.4992C19.0153 10.2566 18.9325 10.0176 18.7703 9.83652C18.6065 9.65547 18.3774 9.54824 18.1342 9.5377Z" fill="#83868D" stroke="#83868D" stroke-width="0.25"/></svg></span></div>
+              <aside class="of-side">
+                <div class="of-head"><span>Дополнительные фильтры</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.3641 2.22192L10.0001 8.58588L3.63614 2.22192L2.22192 3.63614L8.58588 10.0001L2.22192 16.3641L3.63614 17.7783L10.0001 11.4143L16.3641 17.7783L17.7783 16.3641L11.4143 10.0001L17.7783 3.63614L16.3641 2.22192Z" fill="#83868D"/></svg></div>
+                <div class="of-body">
+                  <div class="of-f full"><span>Тип акта</span><div class="of-in"><span class="v">Все</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M11.2929 5.27398C11.6834 4.90867 12.3166 4.90867 12.7071 5.27398C13.0976 5.63928 13.0976 6.23156 12.7071 6.59687L8.68313 10.361C8.2987 10.7206 7.7013 10.7206 7.31687 10.361L3.29289 6.59687C2.90237 6.23156 2.90237 5.63928 3.29289 5.27398C3.68342 4.90867 4.31658 4.90867 4.70711 5.27398L8 8.35423L11.2929 5.27398Z" fill="#83868D"/></svg></div></div>
+                  <div class="of-f "><span>Дата акта</span><div class="of-in of-d"><span class="ph">ДД.ММ.ГГГГ</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M14 13L16.5 10L14 7" stroke="#83868D" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 9.25h11.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" fill="#83868D"/></svg><span class="ph">ДД.ММ.ГГГГ</span><svg class="cal" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M1 5C1 3.34315 2.34315 2 4 2H16C17.6569 2 19 3.34315 19 5V15C19 16.6569 17.6569 18 16 18H4C2.34315 18 1 16.6569 1 15V5ZM4 6C3.44772 6 3 6.44772 3 7V15C3 15.5523 3.44772 16 4 16H16C16.5523 16 17 15.5523 17 15V7C17 6.44772 16.5523 6 16 6H4Z" fill="#83868D"/><g fill="#83868D"><rect x="5" y="8" width="2" height="2" rx="1"/><rect x="5" y="1" width="2" height="2" rx="1"/><rect x="13" y="1" width="2" height="2" rx="1"/><rect x="5" y="12" width="2" height="2" rx="1"/><rect x="9" y="8" width="2" height="2" rx="1"/><rect x="9" y="12" width="2" height="2" rx="1"/><rect x="13" y="8" width="2" height="2" rx="1"/><rect x="13" y="12" width="2" height="2" rx="1"/></g></svg></div></div>
+                  <div class="of-f "><span>Дата добавления</span><div class="of-in of-d" id="ofD"><span class="ph" id="ofD1">ДД.ММ.ГГГГ</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M14 13L16.5 10L14 7" stroke="#83868D" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 9.25h11.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" fill="#83868D"/></svg><span class="ph" id="ofD2">ДД.ММ.ГГГГ</span><svg class="cal" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M1 5C1 3.34315 2.34315 2 4 2H16C17.6569 2 19 3.34315 19 5V15C19 16.6569 17.6569 18 16 18H4C2.34315 18 1 16.6569 1 15V5ZM4 6C3.44772 6 3 6.44772 3 7V15C3 15.5523 3.44772 16 4 16H16C16.5523 16 17 15.5523 17 15V7C17 6.44772 16.5523 6 16 6H4Z" fill="#83868D"/><g fill="#83868D"><rect x="5" y="8" width="2" height="2" rx="1"/><rect x="5" y="1" width="2" height="2" rx="1"/><rect x="13" y="1" width="2" height="2" rx="1"/><rect x="5" y="12" width="2" height="2" rx="1"/><rect x="9" y="8" width="2" height="2" rx="1"/><rect x="9" y="12" width="2" height="2" rx="1"/><rect x="13" y="8" width="2" height="2" rx="1"/><rect x="13" y="12" width="2" height="2" rx="1"/></g></svg></div></div>
+                  <div class="of-f "><span>Дата регистрации</span><div class="of-in of-d"><span class="ph">ДД.ММ.ГГГГ</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M14 13L16.5 10L14 7" stroke="#83868D" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 9.25h11.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" fill="#83868D"/></svg><span class="ph">ДД.ММ.ГГГГ</span><svg class="cal" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M1 5C1 3.34315 2.34315 2 4 2H16C17.6569 2 19 3.34315 19 5V15C19 16.6569 17.6569 18 16 18H4C2.34315 18 1 16.6569 1 15V5ZM4 6C3.44772 6 3 6.44772 3 7V15C3 15.5523 3.44772 16 4 16H16C16.5523 16 17 15.5523 17 15V7C17 6.44772 16.5523 6 16 6H4Z" fill="#83868D"/><g fill="#83868D"><rect x="5" y="8" width="2" height="2" rx="1"/><rect x="5" y="1" width="2" height="2" rx="1"/><rect x="13" y="1" width="2" height="2" rx="1"/><rect x="5" y="12" width="2" height="2" rx="1"/><rect x="9" y="8" width="2" height="2" rx="1"/><rect x="9" y="12" width="2" height="2" rx="1"/><rect x="13" y="8" width="2" height="2" rx="1"/><rect x="13" y="12" width="2" height="2" rx="1"/></g></svg></div></div>
+                  <div class="of-f "><span>Начало периода</span><div class="of-in of-d"><span class="ph">ДД.ММ.ГГГГ</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M14 13L16.5 10L14 7" stroke="#83868D" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 9.25h11.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" fill="#83868D"/></svg><span class="ph">ДД.ММ.ГГГГ</span><svg class="cal" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M1 5C1 3.34315 2.34315 2 4 2H16C17.6569 2 19 3.34315 19 5V15C19 16.6569 17.6569 18 16 18H4C2.34315 18 1 16.6569 1 15V5ZM4 6C3.44772 6 3 6.44772 3 7V15C3 15.5523 3.44772 16 4 16H16C16.5523 16 17 15.5523 17 15V7C17 6.44772 16.5523 6 16 6H4Z" fill="#83868D"/><g fill="#83868D"><rect x="5" y="8" width="2" height="2" rx="1"/><rect x="5" y="1" width="2" height="2" rx="1"/><rect x="13" y="1" width="2" height="2" rx="1"/><rect x="5" y="12" width="2" height="2" rx="1"/><rect x="9" y="8" width="2" height="2" rx="1"/><rect x="9" y="12" width="2" height="2" rx="1"/><rect x="13" y="8" width="2" height="2" rx="1"/><rect x="13" y="12" width="2" height="2" rx="1"/></g></svg></div></div>
+                  <div class="of-f l"><span>Конец периода</span><div class="of-in of-d"><span class="ph">ДД.ММ.ГГГГ</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M14 13L16.5 10L14 7" stroke="#83868D" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 9.25h11.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1 0-1.5z" fill="#83868D"/></svg><span class="ph">ДД.ММ.ГГГГ</span><svg class="cal" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M1 5C1 3.34315 2.34315 2 4 2H16C17.6569 2 19 3.34315 19 5V15C19 16.6569 17.6569 18 16 18H4C2.34315 18 1 16.6569 1 15V5ZM4 6C3.44772 6 3 6.44772 3 7V15C3 15.5523 3.44772 16 4 16H16C16.5523 16 17 15.5523 17 15V7C17 6.44772 16.5523 6 16 6H4Z" fill="#83868D"/><g fill="#83868D"><rect x="5" y="8" width="2" height="2" rx="1"/><rect x="5" y="1" width="2" height="2" rx="1"/><rect x="13" y="1" width="2" height="2" rx="1"/><rect x="5" y="12" width="2" height="2" rx="1"/><rect x="9" y="8" width="2" height="2" rx="1"/><rect x="9" y="12" width="2" height="2" rx="1"/><rect x="13" y="8" width="2" height="2" rx="1"/><rect x="13" y="12" width="2" height="2" rx="1"/></g></svg></div></div>
+                  <div class="of-f l"><span>Социальная реклама</span><div class="of-in" id="ofSoc"><span class="v" id="ofSocV">Все</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M11.2929 5.27398C11.6834 4.90867 12.3166 4.90867 12.7071 5.27398C13.0976 5.63928 13.0976 6.23156 12.7071 6.59687L8.68313 10.361C8.2987 10.7206 7.7013 10.7206 7.31687 10.361L3.29289 6.59687C2.90237 6.23156 2.90237 5.63928 3.29289 5.27398C3.68342 4.90867 4.31658 4.90867 4.70711 5.27398L8 8.35423L11.2929 5.27398Z" fill="#83868D"/></svg></div>
+                    <div class="of-menu" id="ofMenu"><span class="cur">Все</span><span id="ofYes">Да</span><span>Нет</span></div></div>
+                  <div class="of-f "><span>Социальная реклама по квоте</span><div class="of-in"><span class="v">Все</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M11.2929 5.27398C11.6834 4.90867 12.3166 4.90867 12.7071 5.27398C13.0976 5.63928 13.0976 6.23156 12.7071 6.59687L8.68313 10.361C8.2987 10.7206 7.7013 10.7206 7.31687 10.361L3.29289 6.59687C2.90237 6.23156 2.90237 5.63928 3.29289 5.27398C3.68342 4.90867 4.31658 4.90867 4.70711 5.27398L8 8.35423L11.2929 5.27398Z" fill="#83868D"/></svg></div></div>
+                </div>
+                <div class="of-foot"><span class="of-reset"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M17.0894 5.1857C17.8705 5.96675 17.8705 7.23308 17.0894 8.01412L10.1035 15H16.6753C17.2276 15 17.6753 15.4477 17.6753 16C17.6753 16.5523 17.2276 17 16.6753 17H7.25C7.22761 17 7.2054 16.9993 7.18338 16.9978C6.70256 16.9759 6.22816 16.7813 5.86099 16.4141L3.03256 13.5857C2.25152 12.8047 2.25152 11.5383 3.03256 10.7573L11.4326 2.35727C12.2136 1.57622 13.4799 1.57622 14.261 2.35727L17.0894 5.1857ZM12.4932 3.41793L8.41021 7.50094L11.9457 11.0365L16.0288 6.95346C16.224 6.7582 16.224 6.44162 16.0288 6.24636L13.2003 3.41793C13.0051 3.22267 12.6885 3.22267 12.4932 3.41793Z" fill="#0087CD"/></svg>Сбросить</span><span class="of-btn">Отменить</span><span class="of-btn pri" id="ofApply">Применить</span></div>
+              </aside>
+              <div class="of-cur" id="ofCur"><svg width="20" height="26" viewBox="0 0 20 26" aria-hidden="true"><path d="M1.5 1.5v19.2l4.6-4.3 3 7 3.2-1.4-3-6.9h6.3z" fill="#16181D" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+        </section>
+      </article>
+      <hr class="proj-div">
+      <article class="project" aria-labelledby="sb-pg">
+        <header class="proj-head">
+          <h3 id="sb-pg">Продуктовая графика</h3>
+          <p>3D-иконки для&nbsp;интерфейса рекламного кабинета SberAds</p>
+        </header>
+        <button class="case-cover" type="button" data-gallery="[{&quot;src&quot;: &quot;img/f/pg-paymodel.webp&quot;, &quot;title&quot;: &quot;Цели по модели оплаты&quot;, &quot;alt&quot;: &quot;Продуктовая графика SberAds: Цели по модели оплаты&quot;}, {&quot;src&quot;: &quot;img/f/pg-goals.webp&quot;, &quot;title&quot;: &quot;Выбор цели кампании&quot;, &quot;alt&quot;: &quot;Продуктовая графика SberAds: Выбор цели кампании&quot;}, {&quot;src&quot;: &quot;img/f/pg-adtype.webp&quot;, &quot;title&quot;: &quot;Тип объявления&quot;, &quot;alt&quot;: &quot;Продуктовая графика SberAds: Тип объявления&quot;}]" data-title="Продуктовая графика" aria-label="Открыть проект «Продуктовая графика», 3 изображения">
+          <span class="mosaic m3">
+            <span class="m big"><img src="img/t/pg-paymodel.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/pg-goals.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/pg-adtype.webp" alt="" loading="lazy"></span>
+          </span>
+
+          <span class="ext">Смотреть<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+      </article>
+      <article class="project" aria-labelledby="sb-land">
+        <header class="proj-head">
+          <h3 id="sb-land">Сайт SberAds</h3>
+          <p>Редизайн лендинга SberAds, участие в&nbsp;проработке новой смысловой структуры, создание графики и&nbsp;видео, адаптивы на&nbsp;все разрешения.</p>
+        </header>
+        <a class="case-cover case-link" href="https://ads.sber.ru/" target="_blank" rel="noopener" aria-label="Открыть сайт SberAds в новой вкладке">
+          <img src="img/t/sb-landing.webp" alt="Первый экран сайта SberAds: «Ваша реклама в интернете»" width="1600" height="800" loading="lazy">
+          <span class="ext">Открыть сайт<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+      <article class="project" aria-labelledby="ord-land">
+        <header class="proj-head">
+          <h3 id="ord-land">Сайт ОРД</h3>
+          <p>Редизайн и&nbsp;поддержка лендинга ОРД от&nbsp;SberAds.</p>
+        </header>
+        <a class="case-cover case-link" href="https://ord-lab.ru/" target="_blank" rel="noopener" aria-label="Открыть сайт ОРД в новой вкладке">
+          <img src="img/t/ord-landing.webp" alt="Первый экран сайта ОРД в тёмной теме" width="1440" height="720" loading="lazy">
+          <span class="ext">Открыть сайт<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+      <article class="project" aria-labelledby="sb-kv">
+        <header class="proj-head">
+          <h3 id="sb-kv">Графика</h3>
+          <p>Генерация статичных визуалов и&nbsp;видео для&nbsp;рекламных кампаний и&nbsp;презентаций с&nbsp;помощью AI.</p>
+        </header>
+        <button class="case-cover" type="button" data-gallery="[{&quot;src&quot;: &quot;img/f/kv-sneaker.webp&quot;, &quot;title&quot;: &quot;Реклама и кнопка «Купить»&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Реклама и кнопка «Купить»&quot;}, {&quot;src&quot;: &quot;img/f/kv-data.webp&quot;, &quot;title&quot;: &quot;Данные Сбера для рекламы вашего бизнеса&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Данные Сбера для рекламы вашего бизнеса&quot;}, {&quot;src&quot;: &quot;img/f/kv-autumn.webp&quot;, &quot;title&quot;: &quot;Поймайте скидку 15 000 ₽&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Поймайте скидку 15 000 ₽&quot;}, {&quot;src&quot;: &quot;img/f/kv-internet.webp&quot;, &quot;title&quot;: &quot;Найдем ваших клиентов в интернете&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Найдем ваших клиентов в интернете&quot;}, {&quot;src&quot;: &quot;img/f/kv-geo.webp&quot;, &quot;title&quot;: &quot;Геотаргетинг&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Геотаргетинг&quot;}, {&quot;src&quot;: &quot;img/f/kv-buyers.webp&quot;, &quot;title&quot;: &quot;Найдем клиентов, готовых к покупке&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Найдем клиентов, готовых к покупке&quot;}, {&quot;src&quot;: &quot;img/f/kv-online.webp&quot;, &quot;title&quot;: &quot;Найдите клиентов онлайн&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Найдите клиентов онлайн&quot;}, {&quot;src&quot;: &quot;img/f/kv-ad.webp&quot;, &quot;title&quot;: &quot;Реклама на платформе&quot;, &quot;alt&quot;: &quot;Ключевой визуал SberAds: Реклама на платформе&quot;}]" data-title="Графика" aria-label="Открыть проект «Графика», 8 изображений">
+          <span class="mosaic">
+            <span class="m big"><img src="img/t/kv-sneaker.webp" alt="" loading="lazy" style="object-position:34% center"></span>
+            <span class="m"><img src="img/t/kv-data.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/kv-autumn.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/kv-internet.webp" alt="" loading="lazy"></span>
+            <span class="m more"><img src="img/t/kv-geo.webp" alt="" loading="lazy" style="object-position:62% center"><span class="more-n">+4</span></span>
+          </span>
+
+          <span class="ext">Смотреть<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+      </article>
+    </div>
+  </section>
+
+  <!-- Рамблер -->
+  <section class="row" id="rambler" aria-labelledby="rb-t">
+    <div class="side">
+      <span class="badge b-rambler" aria-hidden="true">/</span>
+      <b id="rb-t">Рамблер&amp;Co</b>
+      <span>Арт-директор, ведущий коммуникационный дизайнер</span>
+      <span class="when m">2016 → 2023</span>
+    </div>
+    <div class="stack">
+      <article class="project" aria-labelledby="rb-redesign">
+        <header class="proj-head">
+          <h3 id="rb-redesign">Редизайн портала Рамблер/</h3>
+          <p>Принимала активное участие в&nbsp;обновлении айдентики новостного портала Рамблер/. Вместе с&nbsp;командой были определены позиционирование, архетип и&nbsp;tone of voice бренда. Проработала атрибуты: цвета, паттерн, работу с&nbsp;логотипом, использование формообразующих элементов, стиль иллюстраций.</p>
+        </header>
+        <button class="case-cover" type="button" data-gallery="[{&quot;src&quot;: &quot;img/f/rb-hero.webp&quot;, &quot;title&quot;: &quot;Концепция бренда&quot;, &quot;alt&quot;: &quot;Объёмные иконки-слеши на синем градиенте&quot;}, {&quot;src&quot;: &quot;img/f/rb-slogan.webp&quot;, &quot;title&quot;: &quot;Позиционирование&quot;, &quot;alt&quot;: &quot;Слайд с позиционированием Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-idea.webp&quot;, &quot;title&quot;: &quot;Идея&quot;, &quot;alt&quot;: &quot;Слайд «Идея»: метафора слеша в движении в рекламных сообщениях&quot;}, {&quot;src&quot;: &quot;img/f/rb-palette.webp&quot;, &quot;title&quot;: &quot;Палитра&quot;, &quot;alt&quot;: &quot;Палитра бренда&quot;}, {&quot;src&quot;: &quot;img/f/rb-palette-ext.webp&quot;, &quot;title&quot;: &quot;Расширенная палитра&quot;, &quot;alt&quot;: &quot;Расширенная палитра: лаймовый и фуксия&quot;}, {&quot;src&quot;: &quot;img/f/rb-pattern.webp&quot;, &quot;title&quot;: &quot;Паттерн&quot;, &quot;alt&quot;: &quot;Паттерн из слешей&quot;}, {&quot;src&quot;: &quot;img/f/rb-icons-var.webp&quot;, &quot;title&quot;: &quot;Иконки сервисов&quot;, &quot;alt&quot;: &quot;Иконки сервисов Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-appicons.webp&quot;, &quot;title&quot;: &quot;Иконки приложений&quot;, &quot;alt&quot;: &quot;Иконки приложений Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-astrolog.webp&quot;, &quot;title&quot;: &quot;Постер гороскопов&quot;, &quot;alt&quot;: &quot;Постер «Ваш личный астролог»&quot;}, {&quot;src&quot;: &quot;img/f/rb-pisces.webp&quot;, &quot;title&quot;: &quot;Постер «Рыбы в кармане»&quot;, &quot;alt&quot;: &quot;Постер Рамблер/гороскопов «Рыбы в кармане»&quot;}, {&quot;src&quot;: &quot;img/f/rb-illustration.webp&quot;, &quot;title&quot;: &quot;Иллюстрация&quot;, &quot;alt&quot;: &quot;Иллюстрация в стиле бренда: герои на летящих слешах&quot;}, {&quot;src&quot;: &quot;img/f/rb-errors.webp&quot;, &quot;title&quot;: &quot;Страницы ошибок&quot;, &quot;alt&quot;: &quot;Иллюстрации для страниц ошибок 403, 404 и 503&quot;}, {&quot;src&quot;: &quot;img/f/rb-billboard.webp&quot;, &quot;title&quot;: &quot;Билборд&quot;, &quot;alt&quot;: &quot;Билборд Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-cityformat.webp&quot;, &quot;title&quot;: &quot;Ситиформат&quot;, &quot;alt&quot;: &quot;Ситиформат Рамблер/почты&quot;}, {&quot;src&quot;: &quot;img/f/rb-flags.webp&quot;, &quot;title&quot;: &quot;Флаги&quot;, &quot;alt&quot;: &quot;Флаги с логотипом и паттерном&quot;}, {&quot;src&quot;: &quot;img/f/rb-welcomepack.webp&quot;, &quot;title&quot;: &quot;Welcome-pack&quot;, &quot;alt&quot;: &quot;Welcome-pack Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-pins.webp&quot;, &quot;title&quot;: &quot;Значки&quot;, &quot;alt&quot;: &quot;Значки Рамблера на карточках&quot;}, {&quot;src&quot;: &quot;img/f/rb-hoodie.webp&quot;, &quot;title&quot;: &quot;Худи&quot;, &quot;alt&quot;: &quot;Худи Рамблера&quot;}, {&quot;src&quot;: &quot;img/f/rb-tote.webp&quot;, &quot;title&quot;: &quot;Шопер&quot;, &quot;alt&quot;: &quot;Шоперы Рамблера&quot;}]" data-title="Редизайн портала Рамблер/" aria-label="Открыть проект «Редизайн портала Рамблер/», 19 изображений">
+          <span class="mosaic">
+            <span class="m big"><img src="img/t/rb-hero.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/rb-palette.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/rb-icons-var.webp" alt="" loading="lazy"></span>
+            <span class="m"><img src="img/t/rb-billboard.webp" alt="" loading="lazy"></span>
+            <span class="m more"><img src="img/t/rb-hoodie.webp" alt="" loading="lazy"><span class="more-n">+14</span></span>
+          </span>
+
+          <span class="ext">Смотреть<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+      </article>
+      <article class="project" aria-labelledby="rb-dark">
+        <header class="proj-head">
+          <h3 id="rb-dark">Тёмная сторона Рамблер/почты</h3>
+          <p>Спецпроект к&nbsp;запуску тёмной темы в&nbsp;Рамблер/почте. Делала структуру лендинга, отрисовывала персонажей.</p>
+        </header>
+        <a class="case-cover case-link" href="https://mail.rambler.ru/dark/" target="_blank" rel="noopener" aria-label="Открыть проект «Тёмная сторона Рамблер/почты» на сайте, в новой вкладке">
+          <img src="img/t/rb-dark.webp" alt="Кнопка с лапкой на тёмном фоне и надпись «Нажми на лапку и открой свою тёмную сторону»" width="1600" height="1164" loading="lazy">
+          <span class="ext">Открыть сайт<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+      <article class="project" aria-labelledby="rb-tarot">
+        <header class="proj-head">
+          <h3 id="rb-tarot">Расклад Таро</h3>
+          <p>Спецпроект Рамблер/гороскопов: гадание «Кельтский крест».</p>
+        </header>
+        <a class="case-cover case-link" href="https://horoscopes.rambler.ru/special-projects/tarot/" target="_blank" rel="noopener" aria-label="Открыть спецпроект «Расклад Таро» в новой вкладке">
+          <img src="img/t/rb-tarot.webp" alt="Первый экран спецпроекта «Расклад Таро. Кельтский крест»" width="1394" height="697" loading="lazy">
+          <span class="ext">Открыть сайт<svg class="arr" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+      <article class="project" aria-labelledby="rb-other">
+        <header class="proj-head"><h3 id="rb-other">Другие проекты</h3><p>Лендинги, спецпроекты, мерч и&nbsp;офлайн-активации для&nbsp;сервисов Рамблера.</p></header>
+        <div class="grid">
+        <figure class="card"><button class="shot tall" type="button" data-full="img/f/land-mail.webp"><img src="img/t/land-mail.webp" alt="Лендинг облачной почты для бизнеса" width="1240" height="1054" loading="lazy"></button><figcaption><b>Почта для&nbsp;бизнеса</b><span>Лендинг облачной почты: защита переписки, администрирование, календарь и&nbsp;форма раннего доступа.</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/mr-box.webp"><img src="img/t/mr-box.webp" alt="Коробка «Удачный расклад!»" width="1240" height="1653" loading="lazy"></button><figcaption><b>Коробка «Удачный расклад!»</b><span>Подарочный набор с&nbsp;колодой таро для&nbsp;Рамблер/гороскопов.</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/mr-card.webp"><img src="img/t/mr-card.webp" alt="Карта таро «Маг»" width="1240" height="1654" loading="lazy"></button><figcaption><b>Карта «Маг»</b><span>Одна из&nbsp;карт колоды.</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/mr-ny-box.webp"><img src="img/t/mr-ny-box.webp" alt="Новогодний набор Рамблера: карты таро, набор для глинтвейна и свеча" width="1240" height="1654" loading="lazy"></button><figcaption><b>Новогодний набор</b><span>Карты таро Рамблер/гороскопов, набор для&nbsp;глинтвейна и&nbsp;свеча в&nbsp;фирменной коробке.</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/mr-buff.webp"><img src="img/t/mr-buff.webp" alt="Бафф Рамблер/почты с усами и паттерном из конвертов" width="1240" height="696" loading="lazy"></button><figcaption><b>Бафф Рамблер/почты</b><span>Мерч с&nbsp;кошачьими усами и&nbsp;паттерном из&nbsp;конвертов.</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/pz-summer.webp"><img src="img/t/pz-summer.webp" alt="Летняя фотозона Рамблер/почты" width="1240" height="1654" loading="lazy"></button><figcaption><b>Фотозона Рамблер/почты</b><span>«Наконец-то на&nbsp;улице!»</span></figcaption></figure>
+        <figure class="card"><button class="shot photo" type="button" data-full="img/f/pz-winter.webp"><img src="img/t/pz-winter.webp" alt="Новогодняя фотозона Рамблера" width="1240" height="1657" loading="lazy"></button><figcaption><b>Новогодняя фотозона</b><span>«Хороших новостей в&nbsp;Новом году».</span></figcaption></figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- Опыт -->
+  <section class="row" id="cv" aria-labelledby="cv-t">
+    <div class="side"><b id="cv-t">Опыт</b></div>
+    <ol class="list">
+      <li><span class="y">2023 → сейчас</span><div><b>UX/UI-дизайнер</b><span class="o">Сбербанк, SberAds · Москва</span></div></li>
+      <li><span class="y">2022 → 2023</span><div><b>Арт-директор</b><span class="o">Рамблер&amp;Co · Москва</span></div></li>
+      <li><span class="y">2016 → 2022</span><div><b>Ведущий коммуникационный дизайнер</b><span class="o">Рамблер&amp;Co · Москва</span><p>Дизайн маркетинговых и&nbsp;коммуникационных материалов для&nbsp;разных платформ: промо-лендинги, спецпроекты, ключевые визуалы стратегических кампаний, айдентика.</p></div></li>
+      <li><span class="y">2013 → 2016</span><div><b>Графический дизайнер</b><span class="o">NLO marketing, digital-агентство · Москва</span><p>Дизайн для&nbsp;соцсетей, креативные концепции для&nbsp;тендеров, инфографика и&nbsp;иллюстрации, айдентика внутренних проектов агентства.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- Образование -->
+  <section class="row" id="edu" aria-labelledby="edu-t">
+    <div class="side"><b id="edu-t">Образование</b></div>
+    <ol class="list">
+      <li><span class="y">2020</span><div><b>НИУ ВШЭ, графический дизайн</b><span class="o">Курс «Визуальные коммуникации с&nbsp;Леонидом Славиным»</span><p>Двухмесячный курс об&nbsp;айдентике и&nbsp;коммуникационном дизайне.</p></div></li>
+      <li><span class="y">2019</span><div><b>Bang Bang Education, веб-дизайн</b><span class="o">Курс «Сетки и&nbsp;построение сайта»</span><p>Месячный курс о&nbsp;структуре сайта.</p></div></li>
+      <li><span class="y">2018</span><div><b>Британская высшая школа дизайна, айдентика бренда</b><span class="o">Курс «Брендинг»</span><p>Четырёхдневный интенсив по&nbsp;созданию фирменного стиля.</p></div></li>
+      <li><span class="y">2010 → 2015</span><div><b>МХПИ</b><span class="o">Московский художественно-промышленный институт · магистратура, графический дизайн</span></div></li>
+    </ol>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 Дарья Шульженко</span>
+  </footer>
+</main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle" hidden>
+  <header><b id="viewerTitle"></b><button class="close" type="button" id="viewerClose">Закрыть</button></header>
+  <div class="stage" id="viewerStage"><img id="viewerImg" alt=""></div>
+</div>
+
+<script>
+(() => {
+  const viewer = document.getElementById('viewer');
+  const img = document.getElementById('viewerImg');
+  let last = null;
+  function open(btn) {
+    last = btn;
+    img.src = btn.dataset.full;
+    img.alt = btn.querySelector('img').alt;
+    document.getElementById('viewerTitle').textContent = btn.dataset.title || btn.closest('.card').querySelector('figcaption b').textContent;
+    viewer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('viewerStage').scrollTop = 0;
+    document.getElementById('viewerClose').focus();
+  }
+  let close = function () {
+    viewer.hidden = true;
+    document.body.style.overflow = '';
+    if (last) last.focus();
+  };
+  document.querySelectorAll('[data-full]').forEach(b => b.addEventListener('click', () => open(b)));
+  const stage = document.getElementById('viewerStage');
+  const single = img;
+  function openGallery(btn) {
+    last = btn;
+    const items = JSON.parse(btn.dataset.gallery);
+    const wrap = document.createElement('div'); wrap.className = 'gal';
+    items.forEach(it => {
+      const fig = document.createElement('figure');
+      const im = document.createElement('img'); im.src = it.src; im.alt = it.alt; im.loading = 'lazy';
+      fig.append(im); wrap.append(fig);
+    });
+    single.hidden = true; stage.classList.add('gallery'); stage.append(wrap);
+    document.getElementById('viewerTitle').textContent = btn.dataset.title;
+    viewer.hidden = false; document.body.style.overflow = 'hidden'; stage.scrollTop = 0;
+    document.getElementById('viewerClose').focus();
+  }
+  document.querySelectorAll('[data-gallery]').forEach(b => b.addEventListener('click', () => openGallery(b)));
+  const closeBase = close;
+  close = function () { const g = stage.querySelector('.gal'); if (g) g.remove(); single.hidden = false; stage.classList.remove('gallery'); closeBase(); };
+  const cmp = document.querySelector('.rk-cmp');
+  if (cmp) {
+    const home = cmp.parentNode, ph = document.createComment('rk');
+    const openCmp = () => {
+      if (cmp.classList.contains('big')) return;
+      last = cmp; home.replaceChild(ph, cmp); single.hidden = true; stage.classList.add('gallery'); stage.append(cmp); cmp.classList.add('big');
+      document.getElementById('viewerTitle').textContent = cmp.dataset.title;
+      viewer.hidden = false; document.body.style.overflow = 'hidden'; stage.scrollTop = 0; document.getElementById('viewerClose').focus();
+    };
+    cmp.addEventListener('click', openCmp);
+    cmp.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !cmp.classList.contains('big')) { e.preventDefault(); openCmp(); } });
+    const closeCmp = close;
+    close = function () { if (cmp.classList.contains('big')) { cmp.classList.remove('big'); home.replaceChild(cmp, ph); } closeCmp(); };
+  }
+  document.getElementById('viewerClose').addEventListener('click', () => close());
+  viewer.addEventListener('click', e => { if (e.target === viewer || e.target.id === 'viewerStage' || e.target.classList.contains('gal')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !viewer.hidden) close(); });
+})();
+/* География показов — анимация */
+(function () {
+  const geo = document.getElementById('geo'); if (!geo) return;
+  const stage = geo.parentElement;
+  const $ = id => document.getElementById(id);
+  const P1 = $('gP1'), P2 = $('gP2'), tip = $('gTip'), tipA = $('gTipA'), tipK = $('gTipK'),
+        R1 = $('gR1'), R2 = $('gR2'), cnt = $('gCnt'), sp2 = $('gSp2'), k2 = $('gK2'),
+        menu = $('gMenu'), ms = $('gMs'), m3 = $('gM3'), m10 = $('gM45'), cur = $('gCur');
+  const A1 = 'Москва, Оружейный переулок, 41', A2 = 'Москва, Улица Мельникова, 24';
+  const fit = () => {
+    const w = stage.clientWidth, h = stage.clientHeight, pad = w < 500 ? 16 : 32;
+    geo.style.setProperty('--s', Math.min((h - pad * 2) / 852, (w - pad * 2) / 644).toFixed(4));
+  };
+  fit(); window.addEventListener('resize', fit);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const off = el => { let x = 0, y = 0; while (el && el !== geo) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; };
+  const center = el => { const [x, y] = off(el); return [x + el.offsetWidth / 2, y + el.offsetHeight / 2]; };
+  const moveTo = (x, y, ms = 900) => { cur.style.transitionDuration = ms + 'ms'; cur.style.transform = `translate(${x}px, ${y}px)`; return wait(ms + 120); };
+  const click = async () => { cur.classList.add('press'); await wait(140); cur.classList.remove('press'); };
+  // курсор: над картой — лапка с пином из макета, вне карты — обычная стрелка
+  const MAPR = [24, 196, 620, 516];
+  (function track() {
+    const m = new DOMMatrixReadOnly(getComputedStyle(cur).transform);
+    const on = m.m41 > MAPR[0] && m.m41 < MAPR[2] && m.m42 > MAPR[1] + 4 && m.m42 < MAPR[3];
+    cur.classList.toggle('onmap', on);
+    requestAnimationFrame(track);
+  })();
+  const MAP = [24, 196];
+  const reset = () => {
+    geo.classList.remove('has');
+    [P1, P2].forEach(p => p.classList.remove('show', 'off'));
+    P2.style.setProperty('--r', 40);
+    tip.classList.remove('show'); [R1, R2].forEach(r => r.classList.remove('show', 'act'));
+    k2.textContent = '3 км'; m3.classList.add('cur'); m10.classList.remove('cur', 'hov');
+    menu.classList.remove('show'); sp2.classList.remove('open'); cnt.textContent = '1';
+  };
+  const finalState = () => {
+    geo.classList.add('has'); P1.classList.add('show', 'off'); P2.classList.add('show');
+    P2.style.setProperty('--r', 60); tip.classList.add('show'); tipA.textContent = A2; tipK.textContent = '4,5 км';
+    R1.classList.add('show'); R2.classList.add('show', 'act'); k2.textContent = '4,5 км'; cnt.textContent = '2';
+    cur.style.display = 'none';
+  };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finalState(); return; }
+  let visible = false;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: .25 }).observe(stage);
+  const whenVisible = async () => { while (!visible) await wait(300); };
+
+  async function run() {
+    for (;;) {
+      await whenVisible();
+      reset(); cur.style.opacity = 1;
+      await moveTo(560, 700, 10); await wait(700);
+      // точка 1
+      let x = MAP[0] + 273, y = MAP[1] + 84;
+      await moveTo(x, y, 1000); await click();
+      P1.classList.add('show'); tipA.textContent = A1; tipK.textContent = '5 км'; tip.classList.add('show');
+      await wait(350); geo.classList.add('has'); R1.classList.add('show', 'act');
+      await wait(1200);
+      // точка 2
+      x = MAP[0] + 363; y = MAP[1] + 177;
+      await moveTo(x, y, 800); await click();
+      P1.classList.add('off'); P2.classList.add('show');
+      tip.classList.remove('show'); await wait(200);
+      tipA.textContent = A2; tipK.textContent = '3 км'; tip.classList.add('show');
+      await wait(250); R1.classList.remove('act'); R2.classList.add('show', 'act'); cnt.textContent = '2';
+      await wait(1100);
+      // дропдаун радиуса у второго адреса
+      let [sx, sy] = center(sp2);
+      await moveTo(sx + 6, sy + 4, 950); await click();
+      const [px, py] = off(sp2);
+      menu.style.left = (px - 8) + 'px'; menu.style.top = (py - menu.offsetHeight - 8) + 'px';
+      ms.scrollTop = 144; sp2.classList.add('open'); menu.classList.add('show');
+      await wait(500);
+      const [mx, my0] = center(m10), my = my0 - ms.scrollTop;
+      await moveTo(mx + 6, my - 2, 600); m10.classList.add('hov'); await wait(250);
+      await click();
+      m3.classList.remove('cur'); m10.classList.add('cur'); await wait(150);
+      menu.classList.remove('show'); sp2.classList.remove('open'); m10.classList.remove('hov');
+      k2.textContent = '4,5 км'; tipK.textContent = '4,5 км'; P2.style.setProperty('--r', 60);
+      await wait(400);
+      await moveTo(560, 700, 900);
+      await wait(2600);
+      // плавный сброс
+      geo.style.transition = 'opacity .4s'; geo.style.opacity = 0; await wait(450);
+      reset(); geo.style.opacity = 1; await wait(500);
+    }
+  }
+  run();
+})();
+/* Дерево РК — анимация */
+(function () {
+  const root = document.getElementById('rkt'); if (!root) return;
+  const stage = root.parentElement, view = document.getElementById('rkView'), list = document.getElementById('rkList'),
+        bar = document.getElementById('rkBar'), cur = document.getElementById('rkCur');
+  const I = {
+    rk: '<svg width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1.9 3.84C1.9 2.27 3.11 1 4.6 1h10.8c1.49 0 2.7 1.27 2.7 2.84v5.69h.4c.28 0 .5.22.5.5v5.21C19 17.31 17.39 19 15.43 19H4.58C2.61 19 1 17.31 1 15.24v-5.21c0-.28.22-.5.5-.5h.4V3.84zm1.8 5.69h2.53c.2 0 .4.08.55.22.15.14.25.33.27.54.21 1.83 1.62 3.03 2.95 3.03s2.74-1.2 2.95-3.03c.03-.21.12-.4.27-.54.15-.14.35-.22.55-.22h2.53V7.63c0-.52-.4-.95-.9-.95H4.6c-.5 0-.9.43-.9.95v1.9zm12.6-5.69v1.11a2.6 2.6 0 0 0-.9-.16H4.6c-.32 0-.62.06-.9.16V3.84c0-.52.4-.95.9-.95h10.8c.5 0 .9.43.9.95zM2.8 15.24v-3.82h2.64c.63 2.23 2.52 3.79 4.56 3.79s3.94-1.56 4.56-3.79h2.64v3.82c0 1.02-.8 1.87-1.78 1.87H4.58c-.98 0-1.78-.85-1.78-1.87z" fill="#83868D"/></svg>',
+    go: '<svg width="20" height="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M1 4a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V4zm3-1a1 1 0 0 0-1 1v5h6V3H4zm5 8H3v5a1 1 0 0 0 1 1h5v-6zm2 0h6v5a1 1 0 0 1-1 1h-5v-6zm6-2h-6V3h5a1 1 0 0 1 1 1v5z" fill="#83868D"/></svg>',
+    ro: '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 14a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H7z" fill="#83868D"/><path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3zm12 0H5v4h10V3zM5 17V9h10v8H5z" fill="#83868D"/></svg>',
+    dots: '<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="5" r="1.5" fill="#83868D"/><circle cx="10" cy="10" r="1.5" fill="#83868D"/><circle cx="10" cy="15" r="1.5" fill="#83868D"/></svg>',
+    ok: '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#42E3B4"/></svg>',
+    up: c => `<svg class="t-chev" width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.71 10.73a1.06 1.06 0 0 1-1.42 0 .9.9 0 0 1 0-1.33l4.03-3.76a1 1 0 0 1 1.36 0l4.03 3.76a.9.9 0 0 1 0 1.33 1.06 1.06 0 0 1-1.42 0L8 7.65l-3.29 3.08z" fill="${c}"/></svg>`
+  };
+  const st = '<div class="t-row st">' + '<span class="t-st">' + I.ok + 'Показы идут</span><i class="t-tg"></i></div>';
+  const campHTML = `<div class="t-card t-camp"><div class="t-row">${I.rk}<span class="t-ttl">Рекламная кампания</span>${I.dots}</div>
+    <div class="t-meta"><span>ID 44727</span><span>Создано: 23.04.2023</span></div>${st}
+    <div class="t-link" id="rkLink"><span id="rkLinkT">Свернуть все группы</span>${I.up('#0087CD')}</div></div>`;
+  const grpHTML = `<div class="t-grp"><div class="t-card t-gcard"><div class="t-row">${I.go}<span class="t-ttl">Группа объявлений</span>${I.dots}</div>
+    <div class="t-meta"><span>ID 44727</span><span>Создано: 23.04.2026</span></div>
+    <div class="t-row st">${I.up('#83868D')}<span class="t-st">${I.ok}Показы идут</span><i class="t-tg"></i></div></div>
+    <div class="t-ads"><div></div></div></div>`;
+  const adHTML = `<div class="t-card t-ad"><div class="t-row">${I.ro}<span class="t-ttl">Объявление</span>${I.dots}</div>
+    <div class="t-sub"><span>Текстово-графическое объявление</span><div class="t-meta"><span>ID 44727</span><span>Создано: 23.04.2023</span></div></div>${st}</div>`;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const frame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const mk = (html, gap) => { const w = document.createElement('div'); w.className = 't-ins'; w.innerHTML = `<div><div class="${gap ? 't-gap' : ''}">${html}</div></div>`; return w; };
+  const show = async w => { await frame(); w.classList.add('in'); };
+  // группа: вставка после кампании (сверху) или в конец
+  const addGroup = (top, closed) => {
+    const w = mk(grpHTML, true); const g = w.querySelector('.t-grp'); if (closed) g.classList.add('closed');
+    if (top) list.insertBefore(w, list.children[1] || null); else list.appendChild(w);
+    show(w); return g;
+  };
+  const addAd = (g, instant) => { const box = g.querySelector('.t-ads > div'); const w = mk(adHTML); box.insertBefore(w, box.firstChild); if (instant) w.classList.add('in'); else show(w); return w; };
+  const fit = () => root.style.setProperty('--s', (stage.clientWidth / 698).toFixed(4));
+  fit(); new ResizeObserver(fit).observe(stage);
+  // скроллбар
+  (function bars() {
+    const vh = view.clientHeight, ch = list.scrollHeight, track = vh - 8;
+    if (ch > vh + 2) { const th = 56; bar.style.height = th + 'px'; bar.style.transform = `translateY(${(track - th) * view.scrollTop / (ch - vh)}px)`; bar.classList.add('show'); }
+    else bar.classList.remove('show');
+    requestAnimationFrame(bars);
+  })();
+  const scrollTo = (y, ms) => new Promise(res => { const s0 = view.scrollTop, t0 = performance.now(); const e = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    (function step(n) { const k = Math.min(1, (n - t0) / ms); view.scrollTop = s0 + (y - s0) * e(k); k < 1 ? requestAnimationFrame(step) : res(); })(t0); });
+  const moveTo = (x, y, ms = 900) => { cur.style.transitionDuration = ms + 'ms'; cur.style.transform = `translate(${x}px, ${y}px)`; return wait(ms + 120); };
+  const click = async () => { cur.classList.add('press'); await wait(140); cur.classList.remove('press'); };
+  const linkPos = () => { const l = document.getElementById('rkLinkT'); let x = l.offsetWidth * .5, y = l.offsetHeight * .6, e = l; while (e && e !== root) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; } return [x, y - view.scrollTop]; };
+  const groups = () => [...list.querySelectorAll('.t-grp')];
+  function reset() { list.innerHTML = ''; view.scrollTop = 0; cur.style.transitionDuration = '0ms'; cur.style.transform = 'translate(760px, 520px)'; }
+  function finalState() {
+    list.appendChild(mk(campHTML)).classList.add('in');
+    for (let i = 0; i < 4; i++) { const w = mk(grpHTML, true); w.classList.add('in'); list.appendChild(w); const g = w.querySelector('.t-grp'); if (i) g.classList.add('closed'); for (let k = 0; k < 3; k++) addAd(g, true); }
+    document.getElementById('rkLink').classList.add('show'); cur.style.display = 'none';
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finalState(); return; }
+  let visible = false;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: .25 }).observe(stage);
+  const whenVisible = async () => { while (!visible) await wait(300); };
+
+  async function run() {
+    for (;;) {
+      await whenVisible(); reset(); await wait(400);
+      // 1. все карточки создаются
+      const c = mk(campHTML); list.appendChild(c); await show(c); await wait(350);
+      const g1 = addGroup(false, false); await wait(300);
+      for (let k = 0; k < 3; k++) { const w = mk(adHTML); g1.querySelector('.t-ads > div').appendChild(w); show(w); await wait(230); }
+      document.getElementById('rkLink').classList.add('show');
+      const g2 = addGroup(false, true); for (let k = 0; k < 2; k++) addAd(g2, true); await wait(230);
+      const g3 = addGroup(false, true); for (let k = 0; k < 3; k++) addAd(g3, true);
+      await wait(1300);
+      // 2. новая группа создаётся выше, её объявления — снизу вверх
+      g1.classList.add('closed');
+      const g0 = addGroup(true, false); await wait(700);
+      for (let k = 0; k < 3; k++) { addAd(g0); await wait(650); }
+      await wait(900);
+      // 3. свернуть все / развернуть все
+      let [lx, ly] = linkPos(); await moveTo(lx, ly, 1000); await click();
+      groups().forEach(g => g.classList.add('closed'));
+      document.getElementById('rkLink').classList.add('down'); document.getElementById('rkLinkT').textContent = 'Развернуть все группы';
+      await wait(1400); await click();
+      groups().forEach(g => g.classList.remove('closed'));
+      document.getElementById('rkLink').classList.remove('down'); document.getElementById('rkLinkT').textContent = 'Свернуть все группы';
+      await wait(900);
+      // 4. скролл со скроллбаром
+      await moveTo(250, 640, 700); await wait(200);
+      const max = list.scrollHeight - view.clientHeight;
+      await scrollTo(max, 2600); await wait(900); await scrollTo(0, 1600);
+      await moveTo(760, 520, 900); await wait(1600);
+      root.style.transition = 'opacity .4s'; root.style.opacity = 0; await wait(450); reset(); root.style.opacity = 1;
+    }
+  }
+  run();
+})();
+/* ОРД — дополнительные фильтры, анимация */
+(function () {
+  const root = document.getElementById('ofp'); if (!root) return;
+  const stage = root.parentElement, $ = id => document.getElementById(id);
+  const cur = $('ofCur'), dIn = $('ofD'), d1 = $('ofD1'), d2 = $('ofD2'), soc = $('ofSoc'), socV = $('ofSocV'),
+        menu = $('ofMenu'), yes = $('ofYes'), apply = $('ofApply'), veil = $('ofVeil'), xBtn = $('ofX');
+  const fit = () => root.style.setProperty('--s', (stage.clientWidth / 1440).toFixed(4));
+  fit(); new ResizeObserver(fit).observe(stage);
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const off = el => { let x = 0, y = 0; while (el && el !== root) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; };
+  const at = (el, fx = .5, fy = .55) => { const [x, y] = off(el); return [x + el.offsetWidth * fx, y + el.offsetHeight * fy]; };
+  // боковая панель сдвинута трансформом — учитываем, только когда она открыта (offset не видит transform)
+  const moveTo = (x, y, ms = 850) => { cur.style.transitionDuration = ms + 'ms'; cur.style.transform = `translate(${x}px, ${y}px)`; return wait(ms + 100); };
+  const click = async () => { cur.classList.add('press'); await wait(140); cur.classList.remove('press'); };
+  const type = async (el, text) => { el.classList.remove('ph'); el.textContent = ''; el.classList.add('of-caret'); for (const ch of text) { el.textContent += ch; await wait(70); } el.classList.remove('of-caret'); };
+  const reset = () => {
+    root.classList.remove('open', 'applied');
+    [d1, d2].forEach(e => { e.textContent = 'ДД.ММ.ГГГГ'; e.classList.add('ph'); e.classList.remove('of-caret'); });
+    dIn.classList.remove('focus'); soc.classList.remove('focus'); socV.textContent = 'Все';
+    menu.classList.remove('show'); yes.classList.remove('hov');
+    cur.style.transitionDuration = '0ms'; cur.style.transform = 'translate(1150px, 760px)';
+  };
+  const finalState = () => { root.classList.add('applied'); cur.style.display = 'none'; };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finalState(); return; }
+  let visible = false;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: .25 }).observe(stage);
+  const whenVisible = async () => { while (!visible) await wait(300); };
+
+  async function run() {
+    for (;;) {
+      await whenVisible(); reset(); await wait(600);
+      // открыть панель
+      await moveTo(1306, 213, 1000); await click();
+      root.classList.add('open'); await wait(650);
+      // дата добавления: период
+      let [x, y] = at(d1, .4); await moveTo(x, y, 900); await click();
+      dIn.classList.add('focus'); await type(d1, '01.09.2026'); await wait(150);
+      await type(d2, '30.09.2026'); await wait(300); dIn.classList.remove('focus');
+      // социальная реклама: «Да»
+      [x, y] = at(soc, .45); await moveTo(x, y, 900); await click();
+      soc.classList.add('focus'); menu.classList.add('show'); await wait(450);
+      [x, y] = at(yes, .2); await moveTo(x, y, 500); yes.classList.add('hov'); await wait(250); await click();
+      socV.textContent = 'Да'; menu.classList.remove('show'); soc.classList.remove('focus'); yes.classList.remove('hov');
+      await wait(600);
+      // применить
+      [x, y] = at(apply); await moveTo(x, y, 900); await click(); apply.classList.add('press'); await wait(150); apply.classList.remove('press');
+      root.classList.add('applied'); await wait(450);
+      root.classList.remove('open'); veil.classList.remove('go'); void veil.offsetWidth; veil.classList.add('go');
+      await wait(1400);
+      // сброс по крестику у иконки фильтра
+      [x, y] = at(xBtn); await moveTo(x + 2, y + 2, 1000); await click();
+      root.classList.remove('applied'); veil.classList.remove('go'); void veil.offsetWidth; veil.classList.add('go');
+      [d1, d2].forEach(e => { e.textContent = 'ДД.ММ.ГГГГ'; e.classList.add('ph'); }); socV.textContent = 'Все';
+      await wait(500); await moveTo(1150, 760, 900); await wait(1800);
+      root.style.transition = 'opacity .4s'; root.style.opacity = 0; await wait(450); reset(); root.style.opacity = 1;
+    }
+  }
+  run();
+})();
+</script>
+
+</body>
+</html>
